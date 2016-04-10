@@ -1,13 +1,16 @@
 # BUDGET MANAGEMENT SYSTEM - ON HOLD
+
 Shelving project idea for later. Currently just notes.
 
 ### MODELS
+
 1. User
 2. Monthly Budget
 3. Expense
 4. Category
 
 ### RELATIONS
+
 1. User has monthly budgets and has many expenses through monthly budgets.
 2. Monthly Budget belongs to a user, has many expenses, and has many categories through expenses.
 3. Expense belongs to a monthly budget, category, and user.
