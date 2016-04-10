@@ -1,4 +1,5 @@
-# BUDGET MANAGEMENT SYSTEM - IN PROGRESS
+# BUDGET MANAGEMENT SYSTEM - ON HOLD
+Shelving project idea for later. Currently just notes.
 
 ### MODELS
 1. User
