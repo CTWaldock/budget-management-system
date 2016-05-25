@@ -14,7 +14,6 @@ Group based budget management system with a backend powered by Ruby on Rails.
 4. Category has many expenses.
 
 ### FEATURES
-
 - Allows user to enter in expenses belonging to a category.
 - Shows user daily expenses and expenses for given month.
 - Allows user to enter monthly budget. Creates daily limit, tracks how often user has exceeded daily limit for the given month, and whether their average daily expense is on track to meet their monthly goal.
