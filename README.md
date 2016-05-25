@@ -1,5 +1,5 @@
-# BUDGET MANAGEMENT SYSTEM - ON HOLD
-Shelving project idea for later. Currently just notes.
+# BUDGET MANAGEMENT SYSTEM - IN PROGRESS
+Group based budget management system with a backend powered by Ruby on Rails.
 
 ### MODELS
 1. User
