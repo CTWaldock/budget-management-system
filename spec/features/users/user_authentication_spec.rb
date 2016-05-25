@@ -24,12 +24,14 @@ describe "user registration" do
 
     expect(page).to have_content("Password confirmation doesn't match.")
   end
+
 end
 
 describe "user sign in/sign out" do
   before do
     @user = Factory.create(:user)
   end
+
   it "allows users to sign in after sign up and sign out" do
 
     visit new_session_path
@@ -45,7 +47,6 @@ describe "user sign in/sign out" do
     expect(page).to have_content("Signed out successfully.")
   end
 
-
   it "does not allow user to sign in with wrong password" do
     visit new_session_path
 
@@ -59,4 +60,5 @@ describe "user sign in/sign out" do
     expect(page).to_not have_link("Sign out")
 
   end
+
 end
