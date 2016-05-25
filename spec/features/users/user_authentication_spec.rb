@@ -5,7 +5,7 @@ describe "user registration" do
     visit new_user_registration_path
 
     fill_in "Email", with: "hello@yahoo.com"
-    fill_in "Password" with: "whatagreatpassword"
+    fill_in "Password", with: "whatagreatpassword"
     fill_in "Password confirmation", with: "whatagreatpassword"
 
     click_button "Sign up"
@@ -17,47 +17,48 @@ describe "user registration" do
     visit new_user_registration_path
 
     fill_in "Email", with: "hey@yahoo.com"
-    fill_in "Password" with: "whatagreatpassword"
+    fill_in "Password", with: "whatagreatpassword"
     fill_in "Password confirmation", with: "nottherightpassword"
 
     click_button "Sign up"
 
-    expect(page).to have_content("Password confirmation doesn't match.")
+    expect(page).to have_content("Password confirmation doesn't match")
   end
 
 end
 
-describe "user sign in/sign out" do
+describe "user log in/log out" do
   before do
-    @user = Factory.create(:user)
+    @user = FactoryGirl.create(:user)
   end
 
-  it "allows users to sign in after sign up and sign out" do
+  it "allows users to log in after sign up and log out" do
 
-    visit new_session_path
+    visit new_user_session_path
 
     fill_in "Email", with: @user.email
     fill_in "Password", with: @user.password
 
-    click_button "Sign in"
+    click_button "Log in"
 
     expect(page).to have_content("Signed in successfully.")
+    expect(page).to have_content(@user.email)
 
-    click_link "Sign out"
+    click_link "Log out"
     expect(page).to have_content("Signed out successfully.")
   end
 
   it "does not allow user to sign in with wrong password" do
-    visit new_session_path
+    visit new_user_session_path
 
     fill_in "Email", with: @user.email
     fill_in "Password", with: 'wrongpassword'
 
-    click_button "Sign in"
+    click_button "Log in"
 
-    expect(page).to have_content("Wrong password.")
+    expect(page).to have_content("Invalid email or password.")
 
-    expect(page).to_not have_link("Sign out")
+    expect(page).to_not have_link("Log out")
 
   end
 
