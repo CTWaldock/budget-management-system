@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BudgetManagementSystem</title>
+  <title>Budget Management System</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <%= render 'layouts/notifications' %>
+
   <%= render 'layouts/header' %>
+  <div class="container">
+    <%= render 'layouts/notifications' %>
 
-<%= yield %>
-
+    <%= yield %>
+  </div>
 </body>
 </html>
