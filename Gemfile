@@ -30,6 +30,7 @@ gem 'autoprefixer-rails'
 
 gem 'omniauth-github'
 
+gem 'figaro'
 
 
 # Use ActiveModel has_secure_password
