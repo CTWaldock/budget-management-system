@@ -62,4 +62,13 @@ describe "user log in/log out" do
 
   end
 
+  it "allows users to login with GitHub" do
+    visit new_user_session_path
+
+    click_link "Log in through GitHub"
+
+    expect(page).to have_content("Signed in successfully.")
+    expect(page).to have_content(@user.email)
+  end
+
 end
