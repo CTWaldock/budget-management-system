@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :budget do
-    limit 1.5
-    name "MyString"
-    start_date "2016-05-26"
-    end_date "2016-05-26"
+    limit 10000.00
+    name "My Budget"
+    start_date Date.current
+    end_date Date.current + 30
   end
 end
