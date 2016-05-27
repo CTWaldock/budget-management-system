@@ -46,12 +46,12 @@ describe Expense do
     end
 
     it 'is invalid without a cost' do
-      new_expense = Expense.new(description: "soda" category: @category)
+      new_expense = Expense.new(description: "soda", category: @category)
       expect(new_expense).to have(1).error_on(:cost)
     end
 
     it 'is invalid without a category' do
-      new_expense = Expense.new(description: "soda" cost: 5.00)
+      new_expense = Expense.new(description: "soda", cost: 5.00)
       expect(new_expense).to have(1).error_on(:category)
     end
 

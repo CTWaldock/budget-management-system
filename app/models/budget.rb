@@ -29,7 +29,9 @@ class Budget < ActiveRecord::Base
   end
 
   def end_cannot_come_before_start
-    errors.add(:end_date, "cannot come before start date") if self.end_date < self.start_date
+    unless self.end_date == nil or self.start_date == nil
+      errors.add(:end_date, "cannot come before start date") if self.end_date < self.start_date
+    end
   end
 
   def status
