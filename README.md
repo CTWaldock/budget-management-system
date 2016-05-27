@@ -1,5 +1,5 @@
 # BUDGET MANAGEMENT SYSTEM - IN PROGRESS
-Budget management system with a backend powered by Ruby on Rails.
+Budget management system with a backend written in Ruby on Rails.
 
 ### MODELS
 1. User
@@ -27,4 +27,4 @@ Budget management system with a backend powered by Ruby on Rails.
 
 - Categories? Represent as a model or as a type of expense? How should a budget know about its categorical expenses and update that without having to make multiple queries every time? Would belong to a budget and have many expenses. Maybe the budget model would have expenses through categories?
 
-- Eventually switch over to a group budget system.
+- Eventually switch over to a group budget system?
