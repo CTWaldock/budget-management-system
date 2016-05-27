@@ -21,6 +21,8 @@ describe User do
   end
 
   it 'has a timezone' do
+    user = FactoryGirl.create(:user)
+    expect(user).to respond_to(:time_zone)
   end
 
 end

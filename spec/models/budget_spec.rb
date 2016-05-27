@@ -12,7 +12,7 @@ describe Budget do
       expect(@budget).to respond_to(:categories)
     end
 
-    'it has many individual expenses through categories' do
+    it 'has many individual expenses through categories' do
       expect(@budget).to respond_to(:expenses)
     end
 
@@ -68,15 +68,15 @@ describe Budget do
         expect(@budget.status).to eq('Completed')
       end
 
+      it 'is inactive if current date is not equal to or greater than start date' do
+        @budget.update(start_date: Date.current + 1)
+        expect(@budget.status).to eq('Inactive')
+      end
+
     end
 
     it 'knows remaining days left' do
       expect(@budget.remaining_days).to eq(30)
-    end
-
-    it 'does not allow start date to begin after end date' do
-      new_budget = FactoryGirl.build(:budget, start_date: Date.current, end_date: Date.current - 1)
-      expect(new_budget.save).to eq(false)
     end
 
   end
@@ -99,6 +99,24 @@ describe Budget do
       expect(new_budget).to have(1).error_on(:limit)
     end
 
+  end
 
+  context 'class scopes' do
+
+    it 'knows which budgets are completed' do
+      @budget.update(start_date: Date.current - 1, end_date: Date.current)
+      expect(Budget.completed).to include(@budget)
+    end
+
+    it 'knows which budgets are in progress' do
+      expect(Budget.active).to include(@budget)
+    end
+
+    it 'knows which budgets have not occurred yet' do
+      @budget.update(start_date: Date.current + 1)
+      expect(Budget.inactive).to include(@budget)
+    end
+
+  end
 
 end

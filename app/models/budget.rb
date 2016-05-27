@@ -3,4 +3,45 @@ class Budget < ActiveRecord::Base
   has_many :categories
   has_many :expenses, :through => :categories
   validates :limit, :start_date, :end_date, presence: true
+  validate :end_cannot_come_before_start
+  scope :active, -> { where("start_date <= ? AND end_date > ?", Date.current, Date.current) }
+  scope :inactive, -> { where("start_date > ?", Date.current) }
+  scope :completed, -> { where("end_date <= ?", Date.current) }
+
+  def remaining_expense
+    self.limit - self.total_expense
+  end
+
+  def exceeded?
+    self.total_expense > self.limit
+  end
+
+  def average_expenditure
+    Date.current > self.start_date ? self.total_expense / (Date.current - self.start_date).to_i : "Unknown"
+  end
+
+  def recommended_expenditure
+    self.remaining_expense/self.remaining_days
+  end
+
+  def remaining_days
+    (self.end_date - self.start_date).to_i
+  end
+
+  def end_cannot_come_before_start
+    errors.add(:end_date, "cannot come before start date") if self.end_date < self.start_date
+  end
+
+  def status
+    if self.start_date > Date.current
+      "Inactive"
+    elsif self.end_date <= Date.current
+      "Completed"
+    else
+      "Active"
+    end
+  end
+
+
+
 end
