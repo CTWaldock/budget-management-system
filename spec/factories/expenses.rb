@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :expense do
-    name "MyString"
-    category_id 1
-    cost 1.5
+    name "Pizza"
+    cost 10.50
   end
 end

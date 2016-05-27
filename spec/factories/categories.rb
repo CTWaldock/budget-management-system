@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    title "MyString"
-    budget_id 1
-    subtotal 1.5
+    title "Food"
+    subtotal 0.00
   end
 end

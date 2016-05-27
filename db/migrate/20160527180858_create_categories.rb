@@ -3,7 +3,7 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.string :title
       t.integer :budget_id
-      t.float :subtotal
+      t.float :subtotal, default: 0.00
 
       t.timestamps null: false
     end

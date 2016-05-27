@@ -1,17 +1,22 @@
 require 'rails_helper'
 
-describe 'Budget' do
+describe Budget do
 
   before do
     @budget = FactoryGirl.create(:budget)
   end
 
-  it 'has many categores' do
-    expect(@budget).to respond_to(:categories)
-  end
+  context 'associations' do
 
-  'it has many individual expenses through categories' do
-    expect(@budget).to respond_to(:expenses)
+
+    it 'has many categores' do
+      expect(@budget).to respond_to(:categories)
+    end
+
+    'it has many individual expenses through categories' do
+      expect(@budget).to respond_to(:expenses)
+    end
+
   end
 
   context 'financial information' do
@@ -64,14 +69,11 @@ describe 'Budget' do
         expect(@budget.status).to eq('Completed')
       end
 
-
-
     end
 
     it 'knows remaining days left' do
       expect(@budget.remaining_days).to eq(30)
     end
-
 
     it 'does not allow start date to begin after end date' do
       new_budget = FactoryGirl.create(:budget, start_date: Date.current, end_date: Date.current - 1)
