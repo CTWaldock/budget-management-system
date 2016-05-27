@@ -20,4 +20,7 @@ describe User do
     expect(user).to eq(User.last)
   end
 
+  it 'has a timezone' do
+  end
+
 end
