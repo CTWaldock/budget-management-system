@@ -25,6 +25,6 @@ Budget management system with a backend powered by Ruby on Rails.
 
 - Need to add timezone column to users and integrate into views, deal with GitHub logged in users. Maybe redirect users w/o TimeZone to a users edit page to set timezone.
 
-- Categories? Represent as a model or as a type of expense? How should a budget know about its categorical expenses and update that without having to make multiple queries every time? Consider BudgetCategory/CategoricalExpense model, no real purpose in having a Category model isolated from a budget. Would belong to a budget and have many expenses. Maybe the budget model would be modified to have expenses through categories?
+- Categories? Represent as a model or as a type of expense? How should a budget know about its categorical expenses and update that without having to make multiple queries every time? Would belong to a budget and have many expenses. Maybe the budget model would have expenses through categories?
 
 - Eventually switch over to a group budget system.

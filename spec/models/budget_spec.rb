@@ -6,10 +6,12 @@ describe 'Budget' do
     @budget = FactoryGirl.create(:budget)
   end
 
-  it 'has many expenses' do
+  it 'has many categores' do
+    expect(@budget).to respond_to(:categories)
   end
 
-  'it has many categories through expenses' do
+  'it has many individual expenses through categories' do
+    expect(@budget).to respond_to(:expenses)
   end
 
   context 'financial information' do
@@ -20,9 +22,6 @@ describe 'Budget' do
 
     it 'has a total expense' do
       expect(@budget).to respond_to(:total_expense)
-    end
-
-    it 'has a categorical expense breakdown' do
     end
 
     it 'knows remaining expense' do
@@ -44,6 +43,10 @@ describe 'Budget' do
     end
 
     it 'has a recommended daily expenditure limit to meet budget' do
+      @budget.update(limit: 300.00)
+      expect(@budget.recommended_expenditure).to eq(10)
+      @budget.update(total_expense: 150.00)
+      expect(@budget.recommended_expenditure).to eq(5)
     end
 
   end
@@ -66,10 +69,13 @@ describe 'Budget' do
     end
 
     it 'knows remaining days left' do
+      expect(@budget.remaining_days).to eq(30)
     end
 
 
     it 'does not allow start date to begin after end date' do
+      new_budget = FactoryGirl.create(:budget, start_date: Date.current, end_date: Date.current - 1)
+      expect(new_budget.save).to eq(false)
     end
 
   end
