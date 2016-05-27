@@ -8,8 +8,7 @@ describe Budget do
 
   context 'associations' do
 
-
-    it 'has many categores' do
+    it 'has many categories' do
       expect(@budget).to respond_to(:categories)
     end
 
@@ -76,10 +75,30 @@ describe Budget do
     end
 
     it 'does not allow start date to begin after end date' do
-      new_budget = FactoryGirl.create(:budget, start_date: Date.current, end_date: Date.current - 1)
+      new_budget = FactoryGirl.build(:budget, start_date: Date.current, end_date: Date.current - 1)
       expect(new_budget.save).to eq(false)
     end
 
   end
+
+  context 'validations' do
+
+    it 'does not allow start date to begin after end date' do
+      new_budget = FactoryGirl.build(:budget, start_date: Date.current, end_date: Date.current - 1)
+      expect(new_budget.save).to eq(false)
+    end
+
+    it 'requires dates' do
+      new_budget = FactoryGirl.build(:budget, start_date: nil, end_date: nil)
+      expect(new_budget).to have(1).error_on(:start_date)
+      expect(new_budget).to have(1).error_on(:end_date)
+    end
+
+    it 'requires a limit' do
+      new_budget = FactoryGirl.build(:budget, limit: nil)
+      expect(new_budget).to have(1).error_on(:limit)
+    end
+
+
 
 end
