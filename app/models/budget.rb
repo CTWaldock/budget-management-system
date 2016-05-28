@@ -2,7 +2,7 @@ class Budget < ActiveRecord::Base
   belongs_to :user
   has_many :categories
   has_many :expenses, :through => :categories
-  validates :limit, :start_date, :end_date, presence: true
+  validates :name, :limit, :start_date, :end_date, presence: true
   validate :end_cannot_come_before_start
   scope :active, -> { where("start_date <= ? AND end_date > ?", Date.current, Date.current) }
   scope :inactive, -> { where("start_date > ?", Date.current) }

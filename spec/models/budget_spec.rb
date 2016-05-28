@@ -99,6 +99,11 @@ describe Budget do
       expect(new_budget).to have(1).error_on(:limit)
     end
 
+    it 'requires a name' do
+      new_budget = FactoryGirl.build(:budget, name: "")
+      expect(new_budget).to have(1).error_on(:budget)
+    end
+
   end
 
   context 'class scopes' do
