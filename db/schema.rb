@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20160527181026) do
   end
 
   create_table "expenses", force: :cascade do |t|
-    t.string   "name"
+    t.string   "description"
     t.integer  "category_id"
     t.float    "cost"
     t.datetime "created_at",  null: false

@@ -14,25 +14,27 @@ describe Expense do
       expect(@expense.category).to eq(@category)
     end
 
-    it 'adds to category subtotal and budget total when saved' do
-      second_expense = FactoryGirl.new(:expense, cost: 5.00, category: @category)
-      expect(@budget.total).to eq(@expense.cost)
+    it 'adds to category subtotal and budget total when created' do
+      expect(@budget.total_expense).to eq(@expense.cost)
       expect(@category.subtotal).to eq(@expense.cost)
 
-      second_expense.save
-      expect(@budget.total).to eq(@expense.cost + second_expense.cost)
+      second_expense = FactoryGirl.create(:expense, cost: 5.00, category: @category)
+      expect(@budget.total_expense).to eq(@expense.cost + second_expense.cost)
       expect(@category.subtotal).to eq(@expense.cost + second_expense.cost)
     end
 
     it 'adjusts category subtotal and budget total when edited' do
       @expense.update(cost: 3.00)
-      expect(@budget.total).to eq(3.00)
+      expect(@budget.total_expense).to eq(3.00)
       expect(@category.subtotal).to eq(3.00)
     end
 
     it 'removes from category subtotal and budget total when deleted' do
+      expect(@budget.total_expense).to eq(@expense.cost)
+      expect(@category.subtotal).to eq(@expense.cost)
+      
       @expense.destroy
-      expect(@budget.total).to eq(0.00)
+      expect(@budget.total_expense).to eq(0.00)
       expect(@category.subtotal).to eq(0.00)
     end
 
