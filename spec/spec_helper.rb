@@ -40,7 +40,7 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  config.include Warden::Test::Helpers
+
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
@@ -86,4 +86,3 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
-Warden.test_mode!
