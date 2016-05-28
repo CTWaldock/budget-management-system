@@ -25,14 +25,14 @@ describe Expense do
 
     it 'adjusts category subtotal and budget total when edited' do
       @expense.update(cost: 3.00)
-      expect(@budget.total_expense).to eq(3.00)
-      expect(@category.subtotal).to eq(3.00)
+      expect(@budget.total_expense).to eq(@expense.cost)
+      expect(@category.subtotal).to eq(@expense.cost)
     end
 
     it 'removes from category subtotal and budget total when deleted' do
       expect(@budget.total_expense).to eq(@expense.cost)
       expect(@category.subtotal).to eq(@expense.cost)
-      
+
       @expense.destroy
       expect(@budget.total_expense).to eq(0.00)
       expect(@category.subtotal).to eq(0.00)
