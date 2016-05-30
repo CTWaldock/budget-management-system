@@ -31,6 +31,8 @@ describe 'budget creation' do
     expect(page).to have_content("Limit is not a number")
     expect(page).to have_content("Start date can't be blank")
     expect(page).to have_content("End date can't be blank")
+    expect(page).to have_content("Categories can't be blank")
+
   end
 
   it 'creates a valid budget and redirects to its show page' do
@@ -40,9 +42,12 @@ describe 'budget creation' do
     fill_in "Limit", with: 500000
     fill_in "Start date", with: Date.current
     fill_in "End date", with: Date.current + 200
+    fill_in "Category 1", with: "Materials"
+    fill_in "Category 2", with: "Labor"
     click_button ("Create Budget")
 
-    expect(page).to have_content("Budget successfully created.")
+    expect(page).to have_content("House Construction Project")
+    expect(page).to_not have_content("Please enter valid information.")
   end
 
 end

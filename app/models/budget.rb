@@ -2,12 +2,21 @@ class Budget < ActiveRecord::Base
   belongs_to :user
   has_many :categories
   has_many :expenses, :through => :categories
-  validates :name, :limit, :start_date, :end_date, presence: true
+  validates :name, :limit, :start_date, :end_date, :categories, presence: true
   validate :end_cannot_come_before_start
+  validates :limit, numericality: true
   scope :active, -> { where("start_date <= ? AND end_date > ?", Date.current, Date.current) }
   scope :inactive, -> { where("start_date > ?", Date.current) }
   scope :completed, -> { where("end_date <= ?", Date.current) }
-  validates :limit, numericality: true
+
+
+
+  def category_titles=(titles)
+    titles.each do |title|
+      category = Category.new(budget: self, title: title)
+      self.categories << category if category.save
+    end
+  end
 
   def remaining_expense
     self.limit - self.total_expense
@@ -29,12 +38,6 @@ class Budget < ActiveRecord::Base
     (self.end_date - self.start_date).to_i
   end
 
-  def end_cannot_come_before_start
-    unless self.end_date == nil or self.start_date == nil
-      errors.add(:end_date, "cannot come before start date") if self.end_date < self.start_date
-    end
-  end
-
   def status
     if self.start_date > Date.current
       "Inactive"
@@ -45,6 +48,12 @@ class Budget < ActiveRecord::Base
     end
   end
 
+  private
 
+  def end_cannot_come_before_start
+    unless self.end_date == nil or self.start_date == nil
+      errors.add(:end_date, "cannot come before start date") if self.end_date < self.start_date
+    end
+  end
 
 end

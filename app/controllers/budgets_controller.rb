@@ -20,7 +20,7 @@ class BudgetsController < ApplicationController
   private
 
   def budget_params
-    params.require(:budget).permit(:name, :start_date, :end_date, :limit)
+    params.require(:budget).permit(:name, :start_date, :end_date, :limit, category_titles: [])
   end
 
   def require_time_zone
