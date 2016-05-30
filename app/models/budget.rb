@@ -7,6 +7,7 @@ class Budget < ActiveRecord::Base
   scope :active, -> { where("start_date <= ? AND end_date > ?", Date.current, Date.current) }
   scope :inactive, -> { where("start_date > ?", Date.current) }
   scope :completed, -> { where("end_date <= ?", Date.current) }
+  validates :limit, numericality: true
 
   def remaining_expense
     self.limit - self.total_expense

@@ -25,11 +25,12 @@ describe 'budget creation' do
     visit new_user_budget_path
     click_button ("Create Budget")
 
-    expect(page).to have_content("There was an error creating this budget.")
-    expect(page).to have_content("Name cannot be blank")
-    expect(page).to have_content("Limit cannot be blank")
-    expect(page).to have_content("Start Date cannot be blank")
-    expect(page).to have_content("End Date cannot be blank")
+    expect(page).to have_content("Please enter valid information.")
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Limit can't be blank")
+    expect(page).to have_content("Limit is not a number")
+    expect(page).to have_content("Start date can't be blank")
+    expect(page).to have_content("End date can't be blank")
   end
 
   it 'creates a valid budget and redirects to its show page' do
@@ -37,8 +38,8 @@ describe 'budget creation' do
     visit new_user_budget_path
     fill_in "Name", with: "House Construction Project"
     fill_in "Limit", with: 500000
-    fill_in "Start Date", with: Date.current
-    fill_in "End Date", with: Date.current + 200
+    fill_in "Start date", with: Date.current
+    fill_in "End date", with: Date.current + 200
     click_button ("Create Budget")
 
     expect(page).to have_content("Budget successfully created.")

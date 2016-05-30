@@ -37,7 +37,7 @@ describe "user log in/log out" do
 
     expect(page).to have_content("Signed in successfully.")
     expect(page).to have_content(@user.email)
-    click_link "Log out"
+    click_link "Log Out"
 
     expect(page).to have_content("Signed out successfully.")
   end
@@ -49,13 +49,13 @@ describe "user log in/log out" do
     click_button "Log in"
 
     expect(page).to have_content("Invalid email or password.")
-    expect(page).to_not have_link("Log out")
+    expect(page).to_not have_link("Log Out")
 
   end
 
   it "allows users to login with GitHub" do
     visit new_user_session_path
-    expect(page).to have_link("Log in with GitHub")
+    expect(page).to have_link("Log In With GitHub")
   end
 
 end

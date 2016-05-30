@@ -1,20 +1,39 @@
-<%= form_for @budget do |f| %>
+<h1>Budget Specifications</h1>
+<%= form_for @budget, :url => user_budgets_path do |f| %>
+  <% if @budget.errors.any? %>
+    <div id="error_explanation">
+      <h2>Please enter valid information.</h2>
 
+      <ul>
+        <% @budget.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
   <%= f.label :name %>
   <%= f.text_field :name %>
+  </div>
 
-  <br></br>
-
+  <div class="field">
   <%= f.label :limit %>
   <%= f.text_field :limit %>
+  </div>
 
-  <br></br>
+  <div class="field">
   <%= f.label :start_date %>
   <%= f.date_field :start_date %>
-  <br></br>
+  </div>
+
+  <div class="field">
   <%= f.label :end_date %>
   <%= f.date_field :end_date %>
-  <br></br>
+  </div>
+
+  <div class="actions">
   <%= f.submit %>
+  </div>
 
 <% end %>
