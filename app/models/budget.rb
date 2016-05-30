@@ -8,15 +8,7 @@ class Budget < ActiveRecord::Base
   scope :active, -> { where("start_date <= ? AND end_date > ?", Date.current, Date.current) }
   scope :inactive, -> { where("start_date > ?", Date.current) }
   scope :completed, -> { where("end_date <= ?", Date.current) }
-
-
-
-  def category_titles=(titles)
-    titles.each do |title|
-      category = Category.new(budget: self, title: title)
-      self.categories << category if category.save
-    end
-  end
+  accepts_nested_attributes_for :categories, :reject_if => proc { |attributes| attributes[:title].blank? }
 
   def remaining_expense
     self.limit - self.total_expense

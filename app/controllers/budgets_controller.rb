@@ -3,6 +3,7 @@ class BudgetsController < ApplicationController
 
   def new
     @budget = current_user.budgets.build
+    
   end
 
   def create
@@ -20,7 +21,7 @@ class BudgetsController < ApplicationController
   private
 
   def budget_params
-    params.require(:budget).permit(:name, :start_date, :end_date, :limit, category_titles: [])
+    params.require(:budget).permit(:name, :start_date, :end_date, :limit, :categories_attributes => [:title])
   end
 
   def require_time_zone

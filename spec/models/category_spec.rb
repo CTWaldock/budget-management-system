@@ -19,18 +19,4 @@ describe Category do
 
   end
 
-  context 'validations' do
-
-    it 'is invalid without a title' do
-      new_category = Category.new(budget: @budget)
-      expect(new_category).to have(1).error_on(:title)
-    end
-
-    it 'is invalid without a budget' do
-      new_category = Category.new(title: 'entertainment')
-      expect(new_category).to have(1).error_on(:budget)
-    end
-
-  end
-
 end
