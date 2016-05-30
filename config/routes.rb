@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resources :budgets, only: [:new, :create, :index]
   end
   resources :budgets, only: [:show, :edit, :update, :destroy]
+  get 'user/timezone', to: 'users#edit', as: 'edit_user_time_zone'
+  resources :users, only: [:update]
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
