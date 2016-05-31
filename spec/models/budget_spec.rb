@@ -96,12 +96,12 @@ describe Budget do
 
     it 'requires a limit' do
       new_budget = FactoryGirl.build(:budget, limit: nil)
-      expect(new_budget).to have(1).error_on(:limit)
+      expect(new_budget).to have(2).error_on(:limit)
     end
 
     it 'requires a name' do
       new_budget = FactoryGirl.build(:budget, name: "")
-      expect(new_budget).to have(1).error_on(:budget)
+      expect(new_budget).to have(1).error_on(:name)
     end
 
   end

@@ -42,11 +42,12 @@ describe 'budget creation' do
     fill_in "Limit", with: 500000
     fill_in "Start date", with: Date.current
     fill_in "End date", with: Date.current + 200
-    fill_in "Category 1", with: "Materials"
-    fill_in "Category 2", with: "Labor"
+    fill_in "budget[categories_attributes][0][title]", with: "Materials"
+    fill_in "budget[categories_attributes][1][title]", with: "Labor"
     click_button ("Create Budget")
 
     expect(page).to have_content("House Construction Project")
+    expect(Budget.last.categories.count).to eq(2)
     expect(page).to_not have_content("Please enter valid information.")
   end
 
