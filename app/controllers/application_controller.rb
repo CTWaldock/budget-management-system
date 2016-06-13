@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :set_user_time_zone
 
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to root_url, :alert => "You don't have access to that budget."
+  end
+
 
   private
 
