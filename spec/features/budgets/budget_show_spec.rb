@@ -13,6 +13,9 @@ describe 'budget show' do
     it 'has a link to edit the budget' do
     end
 
+    it 'should inform the user regarding its status' do
+    end
+
   end
 
   context 'expenses' do

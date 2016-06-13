@@ -12,17 +12,18 @@ describe 'budget edit' do
     login_as(@user, :scope => :user)
     visit edit_budget_path(@budget)
 
-    expect(page).to have_content("My Budget")
-    expect(page).to have_content("Food")
+    expect(page).to have_field("Name", with: "My Budget")
+    expect(page).to have_field("budget[categories_attributes][0][title]", with: "Food")
 
     fill_in "Name", with: ""
-    fill_in "budget[categories_attribute][0][title]", with: ""
+    fill_in "budget[categories_attributes][0][title]", with: ""
     fill_in "budget[categories_attributes][1][title]", with: "Labor"
+    click_button "Update Budget"
 
     expect(page).to have_content("Please enter valid information.")
     expect(page).to have_content("Name can't be blank")
-    expect(page).to have_content("Food")
-    expect(page).to have_content("Labor")
+    expect(page).to have_field("budget[categories_attributes][0][title]", with: "Food")
+    expect(page).to have_field("budget[categories_attributes][1][title]", with: "Labor")
 
     fill_in "Name", with: "House Construction Project"
     fill_in "budget[categories_attributes][0][title]", with: "Materials"

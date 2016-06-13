@@ -8,7 +8,21 @@ class Budget < ActiveRecord::Base
   scope :active, -> { where("start_date <= ? AND end_date > ?", Date.current, Date.current) }
   scope :inactive, -> { where("start_date > ?", Date.current) }
   scope :completed, -> { where("end_date <= ?", Date.current) }
-  accepts_nested_attributes_for :categories, :reject_if => proc { |attributes| attributes[:title].blank? }
+
+  # custom nested params to ensure that users can edit category names properly through the budget update route or otherwise create a new category
+  def categories_attributes=(attributes)
+    attributes.each do |index, attribute|
+      unless attribute[:title].blank? || self.categories.map(&:title).include?(attribute[:title])
+        existing_category = self.categories[index.to_i]
+        if existing_category == nil
+          new_category = Category.create(title: attribute[:title])
+          self.categories << new_category
+        else
+          existing_category.update(title: attribute[:title])
+        end
+      end
+    end
+  end
 
   def remaining_expense
     self.limit - self.total_expense
