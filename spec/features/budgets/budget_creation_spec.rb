@@ -9,19 +9,19 @@ describe 'budget creation' do
   it 'requires users to have a timezone before allowing them to access the budget creation page' do
     @user.update(time_zone: nil)
     login_as(@user, :scope => :user)
-    visit new_user_budget_path
+    visit new_budget_path
     expect(page).to have_content("Timezone Settings")
   end
 
   it 'allows users with timezones to access the budget creation page' do
     login_as(@user, :scope => :user)
-    visit new_user_budget_path
+    visit new_budget_path
     expect(page).to have_content("Budget Specifications")
   end
 
   it 'does not create a budget with invalid parameters' do
     login_as(@user, :scope => :user)
-    visit new_user_budget_path
+    visit new_budget_path
     click_button ("Create Budget")
 
     expect(page).to have_content("Please enter valid information.")
@@ -36,7 +36,7 @@ describe 'budget creation' do
 
   it 'creates a valid budget and redirects to its show page' do
     login_as(@user, :scope => :user)
-    visit new_user_budget_path
+    visit new_budget_path
     fill_in "Name", with: "House Construction Project"
     fill_in "Limit", with: 500000
     fill_in "Start date", with: Date.current

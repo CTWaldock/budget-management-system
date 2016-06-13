@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   # users
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks" }
   resource :user, only: [] do
-    resources :budgets, only: [:new, :create, :index]
+    resources :budgets, only: [:index]
   end
   get 'user/timezone', to: 'users#edit', as: 'edit_user_time_zone'
   resources :users, only: [:update]
 
   # budgets
-  resources :budgets, only: [:show, :edit, :update, :destroy]
+  resources :budgets, only: [:new, :create, :show, :edit, :update, :destroy]
 
   # categories
   resources :categories, only: [:destroy, :show]

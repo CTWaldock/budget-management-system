@@ -4,7 +4,7 @@ describe 'budget edit' do
 
   before do
     @user = FactoryGirl.create(:user)
-    @budget = FactoryGirl.create(:budget)
+    @budget = FactoryGirl.create(:budget, user: @user)
 
   end
 
@@ -36,6 +36,7 @@ describe 'budget edit' do
 
   it 'does not allow users to edit budgets that do not belong to them' do
     @other_user = FactoryGirl.create(:user, email: "otheruser@user.com")
+    login_as(@other_user, :scope => :user)
     visit edit_budget_path(@budget)
 
     expect(page).to have_content("You don't have access to that budget.")

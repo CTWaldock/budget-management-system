@@ -4,7 +4,6 @@ class BudgetsController < ApplicationController
 
   def new
     @budget = current_user.budgets.build
-
   end
 
   def create
