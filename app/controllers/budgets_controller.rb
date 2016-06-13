@@ -17,14 +17,17 @@ class BudgetsController < ApplicationController
 
   def show
     @budget = Budget.find(params[:id])
+    authorize @budget
   end
 
   def edit
     @budget = Budget.find(params[:id])
+    authorize @budget
   end
 
   def update
     @budget = Budget.find(params[:id])
+    authorize @budget
     if @budget.update(budget_params)
       redirect_to budget_path(@budget)
     else
