@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 describe 'budget creation' do
 
   before do
