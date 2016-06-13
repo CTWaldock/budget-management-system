@@ -9,7 +9,7 @@ class BudgetPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.try(:user)== user
+    record.try(:user) == user
   end
 
 end
