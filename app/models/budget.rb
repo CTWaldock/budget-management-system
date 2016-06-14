@@ -33,7 +33,7 @@ class Budget < ActiveRecord::Base
   end
 
   def average_expenditure
-    Date.current > self.start_date ? self.total_expense / (Date.current - self.start_date).to_i : "Unknown"
+    Date.current > self.start_date ? self.total_expense / (Date.current - self.start_date).to_i : self.total_expense
   end
 
   def recommended_expenditure
@@ -41,7 +41,7 @@ class Budget < ActiveRecord::Base
   end
 
   def remaining_days
-    (self.end_date - self.start_date).to_i
+    (self.end_date - Date.current).to_i
   end
 
   private

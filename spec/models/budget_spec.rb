@@ -41,7 +41,7 @@ describe Budget do
 
     it 'has a daily spending average based on current total expenditure and time passed' do
       @budget.update(total_expense: 200.00)
-      expect(@budget.average_expenditure).to eq('Unknown')
+      expect(@budget.average_expenditure).to eq(200.00)
       @budget.update(start_date: Date.current - 2)
       expect(@budget.average_expenditure).to eq(100.00)
     end

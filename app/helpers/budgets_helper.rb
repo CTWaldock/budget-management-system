@@ -13,7 +13,7 @@ module BudgetsHelper
     elsif budget.end_date <= Date.current
       "Budget Completed"
     else
-      "Budget in Progress"
+      "Budget in progress with #{budget.remaining_days} days left."
     end
   end
 

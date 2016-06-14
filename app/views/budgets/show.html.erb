@@ -1,12 +1,45 @@
+<h1>Expense Report for <%= @budget.name %></h1>
+<br>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h1> <%= @budget.name %> </h1>
+    <% if @budget.exceeded? %>
+      <h2>Budget Has Been Exceeded</h2>
+    <% end %>
+    <h4><%= show_budget_status(@budget) %></h4>
+    <h4><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h4>
 
-    <h3>Expenditure Limit: <%= number_to_currency(@budget.limit) %></h3>
-    <h3>Current Expenditure: <%= number_to_currency(@budget.total_expense) %></h3>
-    <h3>Remaining Expenditure: <%= number_to_currency(@budget.remaining_expense) %></h3>
-    <h3><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h3>
-    <h3><%= show_budget_status(@budget) %></h3>
+    <h4>Expenditure Limit: <%= number_to_currency(@budget.limit) %></h4>
+    <h4>Current Expenditure: <%= number_to_currency(@budget.total_expense) %></h4>
+    <h4>Remaining Expenditure: <%= number_to_currency(@budget.remaining_expense) %></h4>
+
+    <p> Your current average of daily expenses is <%= number_to_currency(@budget.average_expenditure) %>. In order to meet your budget goals, you can spend up to
+      <%= number_to_currency(@budget.recommended_expenditure) %> on a daily basis. Add and delete expenses by clicking on one of the categories below.</p>
+
+    <h3> Categorical Breakdown </h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>% of Expenditure Limit</th>
+            <th>% of Current Expenditure</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <th scope="row"><%= link_to category.title, category_path(category) %></th>
+              <td><%= number_to_percentage(category.total_percentage, precision: 0)%></td>
+              <td><%= number_to_percentage(category.current_percentage, precision: 0)%></td>
+              <td><%= number_to_currency(category.subtotal) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    <h3> Top Five Expenses </h3>
+
+    <h3> Most Recent Expenses </h3>
 
   </div>
 </div>
