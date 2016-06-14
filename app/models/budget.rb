@@ -44,16 +44,6 @@ class Budget < ActiveRecord::Base
     (self.end_date - self.start_date).to_i
   end
 
-  def status
-    if self.start_date > Date.current
-      "Inactive"
-    elsif self.end_date <= Date.current
-      "Completed"
-    else
-      "Active"
-    end
-  end
-
   private
 
   def end_cannot_come_before_start

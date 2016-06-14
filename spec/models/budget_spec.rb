@@ -57,24 +57,6 @@ describe Budget do
 
   context 'date related information' do
 
-    context 'status' do
-
-      it 'is active when end date has not been met' do
-        expect(@budget.status).to eq('Active')
-      end
-
-      it 'is completed when current date is equal or greater than end date' do
-        @budget.update(start_date: Date.current - 1, end_date: Date.current)
-        expect(@budget.status).to eq('Completed')
-      end
-
-      it 'is inactive if current date is not equal to or greater than start date' do
-        @budget.update(start_date: Date.current + 1)
-        expect(@budget.status).to eq('Inactive')
-      end
-
-    end
-
     it 'knows remaining days left' do
       expect(@budget.remaining_days).to eq(30)
     end

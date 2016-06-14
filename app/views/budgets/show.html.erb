@@ -1,1 +1,12 @@
-<h1> <%= @budget.name %> </h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1> <%= @budget.name %> </h1>
+
+    <h3>Expenditure Limit: <%= number_to_currency(@budget.limit) %></h3>
+    <h3>Current Expenditure: <%= number_to_currency(@budget.total_expense) %></h3>
+    <h3>Remaining Expenditure: <%= number_to_currency(@budget.remaining_expense) %></h3>
+    <h3><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h3>
+    <h3><%= show_budget_status(@budget) %></h3>
+
+  </div>
+</div>
