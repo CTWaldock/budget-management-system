@@ -1,8 +1,8 @@
 class Category < ActiveRecord::Base
   belongs_to :budget
-  has_many :expenses
-  before_destroy :delete_expenses_and_subtract_from_budget
-  # could potentially use :dependent => destroy_all instead which would trigger the before destroy expense callback to subtract cost from budget, but would be more time intensive
+  has_many :expenses, :dependent => :delete_all
+  before_destroy :subtract_from_budget
+  # could potentially use :dependent => destroy_all instead which would trigger the before destroy expense callbacks to subtract cost from budget, but would be more time intensive
 
   def current_percentage
     if budget.total_expense == 0
@@ -18,11 +18,9 @@ class Category < ActiveRecord::Base
 
   private
 
-  def delete_expenses_and_subtract_from_budget
+  def subtract_from_budget
     budget.total_expense -= self.subtotal
     budget.save
-
-    self.expenses.delete_all
   end
 
 end

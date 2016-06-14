@@ -12,7 +12,6 @@ class Expense < ActiveRecord::Base
   private
 
   def add_to_budget_and_category
-    category = self.category
     budget = category.budget
     category.subtotal += self.cost
     category.save
@@ -21,7 +20,6 @@ class Expense < ActiveRecord::Base
   end
 
   def remove_from_budget_and_category
-    category = self.category
     budget = category.budget
     category.subtotal -= self.cost_was
     category.save
