@@ -5,6 +5,12 @@ class Expense < ActiveRecord::Base
   before_destroy :remove_from_budget_and_category
   before_update :remove_from_budget_and_category
 
+  def category_percentage
+    ((self.cost / self.category.subtotal) * 100).round
+  end
+
+  private
+
   def add_to_budget_and_category
     category = self.category
     budget = category.budget
@@ -22,5 +28,7 @@ class Expense < ActiveRecord::Base
     budget.total_expense -= self.cost_was
     budget.save
   end
+
+
 
 end

@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>% of Expenditure Limit</th>
+      <th>% of Current Expenditure</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% categories.each do |category| %>
+      <tr>
+        <th scope="row"><%= link_to category.title, category_path(category) %></th>
+        <td><%= number_to_percentage(category.total_percentage, precision: 0)%></td>
+        <td><%= number_to_percentage(category.current_percentage, precision: 0)%></td>
+        <td><%= number_to_currency(category.subtotal) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

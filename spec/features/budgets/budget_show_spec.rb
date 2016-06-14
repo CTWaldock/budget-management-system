@@ -94,7 +94,7 @@ describe 'budget show' do
       expect(page).to have_link("Food")
       expect(page).to have_link("Gas")
 
-      click_link "Food"
+      click_link("Food", match: :first)
 
       expect(page.current_path).to eq category_path(@first_category)
     end
@@ -103,7 +103,7 @@ describe 'budget show' do
   context 'expenses' do
 
     before do
-      15.times { |i| FactoryGirl.create(:expense, description: "Expense #{i}", cost: 20 - i, category: @first_category) }
+      15.times { |i| FactoryGirl.create(:expense, description: "Expense #{i + 1}", cost: 20 - i, category: @first_category) }
       login_as(@user, :scope => :user)
       visit budget_path(@budget)
     end
