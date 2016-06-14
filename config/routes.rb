@@ -12,11 +12,13 @@ Rails.application.routes.draw do
   # budgets
   resources :budgets, only: [:new, :create, :show, :edit, :update, :destroy]
 
-  # categories
-  resources :categories, only: [:destroy, :show]
+  # categories and nested expense route
+  resources :categories, only: [:destroy, :show] do
+    resources :expenses, only: [:create]
+  end
 
   # expenses
-  resources :expenses, only: [:create, :destroy]
+  resources :expenses, only: [:destroy]
 
 
 
