@@ -44,6 +44,18 @@ class Budget < ActiveRecord::Base
     (self.end_date - Date.current).to_i
   end
 
+  def ordered_categories
+    self.categories.order(:subtotal => :desc)
+  end
+
+  def top_five_expenses
+    self.expenses.order(:cost => :desc).limit(5)
+  end
+
+  def most_recent_expenses
+    self.expenses.order(:created_at => :desc).limit(5)
+  end
+
   private
 
   def end_cannot_come_before_start
