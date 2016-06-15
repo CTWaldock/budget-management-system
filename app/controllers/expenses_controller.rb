@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
 
   def create
-    @category = Category.find(params[:id])
+    @category = Category.find(params[:category_id])
     @expense = @category.expenses.build(expense_params)
     authorize @expense
     if @expense.save

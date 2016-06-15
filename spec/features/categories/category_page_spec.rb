@@ -51,7 +51,29 @@ describe 'category page' do
     expect(@budget.expenses).to_not include(@expense)
   end
 
+  it 'shows errors for invalid expenses' do
+    login_as(@user, :scope => :user)
+    visit category_path(@category)
+    click_button "Create Expense"
+
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Cost can't be blank")
+    expect(page).to have_content("Cost is not a number")
+  end
+
   it 'allows users to add new expenses and adjusts subtotal and budget accordingly' do
+    login_as(@user, :scope => :user)
+    visit category_path(@category)
+    fill_in "Description", with: "Coke"
+    fill_in "Cost", with: "5.00"
+    click_button "Create Expense"
+
+    expect(page).to have_content("Coke")
+    expect(page).to have_content("$25.00")
+
+    @budget.reload
+    expect(@budget.total_expense).to eq(25)
+    expense(@budget.expenses.last.description).to eq("Coke")
   end
 
   it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly' do

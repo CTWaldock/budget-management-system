@@ -1,0 +1,20 @@
+<%= form_for([category, expense])  do |f| %>
+  <% if expense.errors.any? %>
+    <div id="error_explanation">
+      <h2>Please enter valid information.</h2>
+
+      <ul>
+        <% expense.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+          <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :cost %>
+  <%= f.text_field :cost %>
+
+  <%= f.submit %>
+<% end %>

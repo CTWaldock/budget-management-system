@@ -1,6 +1,7 @@
 class Expense < ActiveRecord::Base
   belongs_to :category
   validates :description, :category, :cost, presence: true
+  validates :cost, numericality: true
   before_save :add_to_budget_and_category
   before_destroy :remove_from_budget_and_category
   before_update :remove_from_budget_and_category
@@ -26,7 +27,5 @@ class Expense < ActiveRecord::Base
     budget.total_expense -= self.cost_was
     budget.save
   end
-
-
 
 end

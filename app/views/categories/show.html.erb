@@ -2,24 +2,16 @@
 <h4><%= link_to "Return to Budget", budget_path(@category.budget) %></h4>
 <h4><%= link_to "Delete Category", category_path(@category), :method => :delete %></h4>
 <h4>Add Expense</h4>
-<%= form_for([@category, @category.expenses.build])  do |f| %>
+
 <br>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-
-
-      <%= f.label :description %>
-      <%= f.text_field :description %>
-
-      <%= f.label :cost %>
-      <%= f.text_field :cost %>
-
-      <%= f.submit %>
-    <% end %>
+    <%= render partial: "form", locals: {category: @category, expense: @new_expense} %>
 
     <p>Total costs amount to <%=number_to_currency(@category.subtotal) %>.</p>
     <p>Represents <%=number_to_percentage(@category.current_percentage, precision: 0)%> of current budget expenditure for <%= @category.budget.name%>.</p>
     <p>Represents <%=number_to_percentage(@category.total_percentage, precision: 0)%> of maximum budget expenditure for <%= @category.budget.name%>.</p>
 
+   <%= render partial: "expenses", locals: {expenses: @expenses} %>
   </div>
 </div>

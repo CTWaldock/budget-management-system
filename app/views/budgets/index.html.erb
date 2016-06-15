@@ -2,17 +2,17 @@
 
 
 <h1>Active Budgets</h1>
-<% current_user.budgets.active.each do |budget| %>
+<% @active_budgets.each do |budget| %>
   <%= link_to budget.name, budget %>
 <% end %>
 
 <h1>Inactive Budgets</h1>
-<% current_user.budgets.inactive.each do |budget| %>
+<% @inactive_budgets.each do |budget| %>
    <%= link_to budget.name, budget %>
 <% end %>
 
 <h1>Completed Budgets</h1>
 
-<% current_user.budgets.completed.each do |budget| %>
+<% @completed_budgets.each do |budget| %>
    <%= link_to budget.name, budget %>
 <% end %>

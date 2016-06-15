@@ -2,6 +2,12 @@ class BudgetsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_time_zone
 
+  def index
+    @active_budgets = current_user.budgets.active
+    @inactive_budgets = current_user.budgets.inactive
+    @completed_budgets = current_user.budgets.completed
+  end
+
   def new
     @budget = current_user.budgets.build
   end
