@@ -22,6 +22,15 @@ textarea {
 	margin-bottom: 10px;
 }
 
+header {
+	height: 50px;
+}
+
+#bootstrap-override {
+	margin-bottom: 0px;
+	padding: 5px;
+}
+
 /* typography */
 
 h1, h2, h3, h4, h5, h6, p {
@@ -46,11 +55,8 @@ header p, header p a {
 	padding-bottom: 15px;
 }
 
-header {
-	height: 50px;
-}
 
-#bootstrap-override {
-	margin-bottom: 0px;
-	padding: 5px;
+
+.warning a {
+  color: #BA0000;
 }

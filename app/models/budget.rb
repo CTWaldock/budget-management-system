@@ -1,6 +1,6 @@
 class Budget < ActiveRecord::Base
   belongs_to :user
-  has_many :categories
+  has_many :categories, :dependent => :destroy
   has_many :expenses, :through => :categories
   validates :name, :limit, :start_date, :end_date, :categories, presence: true
   validate :end_cannot_come_before_start

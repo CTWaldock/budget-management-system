@@ -41,6 +41,13 @@ class BudgetsController < ApplicationController
     end
   end
 
+  def destroy
+    @budget = Budget.find(params[:id])
+    authorize @budget
+    @budget.destroy
+    redirect_to user_budgets_path
+  end
+
   private
 
   def budget_params
