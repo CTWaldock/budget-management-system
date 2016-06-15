@@ -33,7 +33,7 @@ class Budget < ActiveRecord::Base
   end
 
   def average_expenditure
-    if Date.current < self.end_date
+    if Date.current > self.end_date
       #completed budget
       self.total_expense / (self.end_date - self.start_date).to_i
     else
