@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h2><%= link_to "Create a New Budget", new_budget_path %></h2>
-
+    <br>
     <h3>Active Budgets</h3>
     <% @active_budgets.each do |budget| %>
       <p><%= link_to budget.name, budget %></p>
