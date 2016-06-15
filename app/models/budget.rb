@@ -33,11 +33,24 @@ class Budget < ActiveRecord::Base
   end
 
   def average_expenditure
-    Date.current > self.start_date ? self.total_expense / (Date.current - self.start_date).to_i : self.total_expense
+    if Date.current < self.end_date
+      #completed budget
+      self.total_expense / (self.end_date - self.start_date).to_i
+    else
+      #active budget
+      # total expense / days passed, in case of first day, just behave as if 1 day has passed, i.e. show total expense
+      Date.current > self.start_date ? self.total_expense / (Date.current - self.start_date).to_i : self.total_expense
+    end
   end
 
   def recommended_expenditure
-    self.remaining_expense/self.remaining_days
+    if Date.current > self.start_date
+      #active budget
+      self.remaining_expense/self.remaining_days
+    else
+      #inactive budgets
+      self.remaining_expense / (self.end_date - self.start_date).to_i
+    end
   end
 
   def remaining_days
