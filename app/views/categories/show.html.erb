@@ -1,12 +1,14 @@
 <h1><%=@category.title%></h1>
 <h4><%= link_to "Return to Budget", budget_path(@category.budget) %></h4>
 <h4 class="warning"><%= link_to "Delete Category", category_path(@category), :method => :delete %></h4>
+<br>
 <h4>Add Expense</h4>
 
-<br>
+
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= render partial: "categories/form", locals: {category: @category, expense: @new_expense} %>
+    <br></br>
 
     <p>Total costs amount to <%=number_to_currency(@category.subtotal) %>.</p>
     <p>Represents <%=number_to_percentage(@category.current_percentage, precision: 0)%> of current budget expenditure for <%= @category.budget.name%>.</p>

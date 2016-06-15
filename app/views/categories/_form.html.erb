@@ -1,20 +1,25 @@
-<%= form_for([category, expense])  do |f| %>
-  <% if expense.errors.any? %>
-    <div id="error_explanation">
-      <h2>Please enter valid information.</h2>
+<div class="center">
+  <%= form_for([category, expense], :html => {class: "form-inline"})  do |f| %>
+    <% if expense.errors.any? %>
+      <div id="error_explanation">
+        <h2>Please enter valid information.</h2>
 
-      <ul>
-        <% expense.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-          <% end %>
-      </ul>
+        <ul>
+          <% expense.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+            <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="inline">
+      <%= f.text_field :description, :placeholder => "Description" %>
     </div>
+
+    <div class="inline">
+      <%= f.text_field :cost, :placeholder => "Cost"  %>
+    </div>
+
+    <%= f.submit class: "btn btn-primary btn-sm" %>
   <% end %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-
-  <%= f.label :cost %>
-  <%= f.text_field :cost %>
-
-  <%= f.submit %>
-<% end %>
+</div>
