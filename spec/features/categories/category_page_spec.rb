@@ -73,7 +73,7 @@ describe 'category page' do
 
     @budget.reload
     expect(@budget.total_expense).to eq(25)
-    expense(@budget.expenses.last.description).to eq("Coke")
+    expect(@budget.expenses.last.description).to eq("Coke")
   end
 
   it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly' do
