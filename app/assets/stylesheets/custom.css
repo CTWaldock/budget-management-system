@@ -49,3 +49,8 @@ header p, header p a {
 header {
 	height: 50px;
 }
+
+#bootstrap-override {
+	margin-bottom: 0px;
+	padding: 5px;
+}
