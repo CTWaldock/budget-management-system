@@ -81,11 +81,11 @@ describe 'category page' do
     visit category_path(@category)
     click_link("Delete Expense", :match => :first)
 
-    expect(page).to_not have_content("Pizza")
+    expect(page).to_not have_content("Burger")
     expect(page).to_not have_content("$20.00")
 
     @budget.reload
-    expect(@budget.total_expense).to eq(@expense.cost)
+    expect(@budget.total_expense).to eq(10.50)
   end
 
 end
