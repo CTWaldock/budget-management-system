@@ -77,6 +77,15 @@ describe 'category page' do
   end
 
   it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly' do
+    login_as(@user, :scope => :user)
+    visit category_path(@category)
+    click_link("Delete Expense", :match => :first)
+
+    expect(page).to_not have_content("Pizza")
+    expect(page).to_not have_content("$20.00")
+
+    @budget.reload
+    expect(@budget.total_expense).to eq(@expense.cost)
   end
 
 end

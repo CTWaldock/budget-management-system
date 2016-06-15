@@ -15,6 +15,11 @@ class ExpensesController < ApplicationController
   end
 
   def destroy
+    @expense = Expense.find(params[:id])
+    @category = @expense.category
+    authorize @expense
+    @expense.destroy
+    redirect_to category_path(@category)
   end
 
   private
