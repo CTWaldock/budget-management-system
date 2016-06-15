@@ -1,12 +1,15 @@
 class ExpensesController < ApplicationController
 
   def create
+
     @category = Category.find(params[:category_id])
-    @expense = @category.expenses.build(expense_params)
-    authorize @expense
-    if @expense.save
+    @new_expense = @category.expenses.build(expense_params)
+    authorize @new_expense
+    if @new_expense.save
       redirect_to category_path(@category)
     else
+      #need to obtain @expenses in order to render 'categories/show' properly in case of failure
+      @expenses = @category.expenses.order(:created_at => :desc)
       render 'categories/show'
     end
   end
