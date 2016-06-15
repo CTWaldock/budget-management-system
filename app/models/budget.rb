@@ -70,9 +70,9 @@ class Budget < ActiveRecord::Base
   end
 
   def status
-    if budget.start_date > Date.current
+    if self.start_date > Date.current
       "Inactive"
-    elsif budget.end_date <= Date.current
+    elsif self.end_date <= Date.current
       "Complete"
     else
       "Active"
