@@ -1,7 +1,6 @@
 class ExpensesController < ApplicationController
 
   def create
-
     @category = Category.find(params[:category_id])
     @new_expense = @category.expenses.build(expense_params)
     authorize @new_expense

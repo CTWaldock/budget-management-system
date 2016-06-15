@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, :alert => "You don't have access to that budget."
   end
 
-
   private
 
   # Users require a timezone in order for budgets to work properly.

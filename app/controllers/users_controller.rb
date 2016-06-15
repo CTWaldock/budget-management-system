@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
 # UsersController handles setting and updating timezones for the user.
 
   def edit
