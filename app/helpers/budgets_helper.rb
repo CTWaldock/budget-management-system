@@ -8,9 +8,9 @@ module BudgetsHelper
   end
 
   def show_budget_status(budget)
-    if budget.start_date > Date.current
+    if budget.status == "Inactive"
       "Budget Not Yet Active"
-    elsif budget.end_date <= Date.current
+    elsif budget.status == "Complete"
       "Budget Completed"
     else
       "Budget in progress with #{budget.remaining_days} days left."

@@ -56,6 +56,16 @@ class Budget < ActiveRecord::Base
     self.expenses.order(:created_at => :desc).limit(5)
   end
 
+  def status
+    if budget.start_date > Date.current
+      "Inactive"
+    elsif budget.end_date <= Date.current
+      "Complete"
+    else
+      "Active"
+    end
+  end
+
   private
 
   def end_cannot_come_before_start
