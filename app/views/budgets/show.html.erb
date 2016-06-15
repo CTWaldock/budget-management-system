@@ -21,13 +21,13 @@
     <p> Add and delete expenses by clicking on one of the categories below.</p>
     <h3> Categorical Breakdown </h3>
 
-      <%= render partial: "categories", locals: { categories: @budget.ordered_categories } %>
+      <%= render partial: "budgets/categories", locals: { categories: @budget.ordered_categories } %>
 
     <h3> Top Five Expenses </h3>
-      <%= render partial: "expenses", locals: { expenses: @budget.top_five_expenses } %>
+      <%= render partial: "budgets/expenses", locals: { expenses: @budget.top_five_expenses } %>
 
     <h3> Most Recent Expenses </h3>
-      <%= render partial: "expenses", locals: { expenses: @budget.most_recent_expenses } %>
+      <%= render partial: "budgets/expenses", locals: { expenses: @budget.most_recent_expenses } %>
 
   </div>
 </div>
