@@ -17,4 +17,16 @@ module BudgetsHelper
     end
   end
 
+  def show_budget_recommendation(budget)
+    if budget.status == "Inactive"
+      "Once your budget begins, you can spend up to #{number_to_currency(budget.recommended_expenditure)} on a daily basis."
+    elsif budget.status == "Complete"
+      "Your average daily expenditure was #{number_to_currency(budget.average_expenditure)}"
+    else
+      "Your current average of daily expenses is #{number_to_currency(budget.average_expenditure)}. In order to meet your budget goals, you can spend up to
+        #{number_to_currency(budget.recommended_expenditure)} on a daily basis."
+    end
+  end
+
+
 end

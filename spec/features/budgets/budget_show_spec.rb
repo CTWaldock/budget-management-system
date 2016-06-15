@@ -51,11 +51,11 @@ describe 'budget show' do
 
       @budget.update(start_date: Date.today + 1)
       visit budget_path(@budget)
-      expect(page).to have_content("Budget Not Yet Active")
+      expect(page).to have_content("This budget is not yet active.")
 
       @budget.update(start_date: Date.today - 5, end_date: Date.today - 3)
       visit budget_path(@budget)
-      expect(page).to have_content("Budget Completed")
+      expect(page).to have_content("This budget has been completed.")
     end
 
   end

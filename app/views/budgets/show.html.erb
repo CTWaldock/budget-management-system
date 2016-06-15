@@ -15,14 +15,8 @@
     <h4>Remaining Expenditure: <%= number_to_currency(@budget.remaining_expense) %></h4>
 
     <br>
-    <% if @budget.status == "Inactive" %>
-      <p>Once your budget begins, you can spend up to <%= number_to_currency(@budget.recommended_expenditure) %> on a daily basis.</p>
-    <% elsif @budget.status == "Complete" %>
-      <p>Your average daily expenditure was <%= number_to_currency(@budget.average_expenditure) %> </p>
-    <% else %>
-      <p> Your current average of daily expenses is <%= number_to_currency(@budget.average_expenditure) %>. In order to meet your budget goals, you can spend up to
-        <%= number_to_currency(@budget.recommended_expenditure) %> on a daily basis.</p>
-    <% end %>
+    <p><%= show_budget_recommendation(@budget) %></p>
+
     <p> Add and delete expenses by clicking on one of the categories below.</p>
     <h3> Categorical Breakdown </h3>
 
