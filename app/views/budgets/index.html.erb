@@ -7,11 +7,13 @@
     <% @active_budgets.each do |budget| %>
       <p><%= link_to budget.name, budget %></p>
     <% end %>
+    <br>
 
     <h3>Inactive Budgets</h3>
     <% @inactive_budgets.each do |budget| %>
        <p><%= link_to budget.name, budget %></p>
     <% end %>
+    <br>
 
     <h3>Completed Budgets</h3>
 
