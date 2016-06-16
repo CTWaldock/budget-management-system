@@ -68,3 +68,7 @@ header p, header p a {
 .warning a {
   color: #BA0000;
 }
+
+.warning {
+	color: #BA0000;
+}
