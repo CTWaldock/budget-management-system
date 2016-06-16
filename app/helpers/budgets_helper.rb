@@ -9,11 +9,11 @@ module BudgetsHelper
 
   def show_budget_status(budget)
     if budget.status == "Inactive"
-      "This budget is not yet active."
+      "This budget is not yet active. It starts at #{budget.start_date.strftime("%B %e, %Y")} and ends at #{budget.end_date.strftime("%B %e, %Y")}."
     elsif budget.status == "Complete"
-      "This budget has been completed."
+      "This budget has been completed. It started at #{budget.start_date.strftime("%B %e, %Y")} and ended at #{budget.end_date.strftime("%B %e, %Y")}."
     else
-      "Budget in progress with #{budget.remaining_days} days left."
+      "Budget in progress with #{budget.remaining_days} days left. It started at #{budget.start_date.strftime("%B %e, %Y")} and ends at #{budget.end_date.strftime("%B %e, %Y")}."
     end
   end
 
