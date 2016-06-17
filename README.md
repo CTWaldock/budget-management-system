@@ -1,30 +1,23 @@
-# BUDGET MANAGEMENT SYSTEM - IN PROGRESS
-Budget management system with a backend written in Ruby on Rails.
+# Budget Management System
+  This Rails application allows users to create budgets in order to keep track of their expenses for specific projects or monthly expenditure. Users can sign up through a Devise-based user authentication system or login via GitHub and proceed to their home page in order to create new budgets with specifications on start date, end date, limits, and categories. Users can then add specific expenses to their categories and obtain a breakdown regarding their expenditure by category, most expensive purchases, most recent purchases, and daily spending average, etc. The back-end of this application utilizes the Ruby on Rails framework and uses PostgreSQL as the database for production. The front-end of this application utilizes the Bootstrap framework for styling purposes and borrows the Superhero theme from Bootswatch.
+  
+## Host on Local Environment
+Clone this directory to your local environment and execute:
+```
+ $ bundle install
+ 
+ $ rake db:migrate
+ 
+ $ rails s
+```
 
-### MODELS
-1. User
-2. Budget
-3. Expense
+You should now be able to sign up, log in, create budgets, and add expenses.
 
+## Demo
 
-### RELATIONS...
-1. User has many budgets.
-2. Budget belongs to a user and have many expenses.
-3. Expense belongs to a budget.
+You can see a demo of this project [here](https://powerful-reef-60562.herokuapp.com/) hosted via Heroku. An example account is included -- just fill in the placeholder text at the login page.
 
+## Contributing
 
-### FEATURES
-- Allows user to enter in expenses.
-- Shows user daily expenses and expenses.
-- Allows user to enter monthly budget. Creates daily limit, tracks how often user has exceeded daily limit for the given month, and whether their average daily expense is on track to meet their monthly goal.
-- Informs user about their (projected) savings or debt from their (projected) monthly expenses.
-- Breaks down information about (projected) monthly spending by category.
+Bug reports and pull requests are welcome on GitHub at https://github.com/viparthasarathy/budget-management-system.
 
-### NOTES
-
-
-- Need to add timezone column to users and integrate into views, deal with GitHub logged in users. Maybe redirect users w/o TimeZone to a users edit page to set timezone.
-
-- Categories? Represent as a model or as a type of expense? How should a budget know about its categorical expenses and update that without having to make multiple queries every time? Would belong to a budget and have many expenses. Maybe the budget model would have expenses through categories?
-
-- Eventually switch over to a group budget system?
