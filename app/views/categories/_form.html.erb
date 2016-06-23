@@ -23,3 +23,15 @@
     <%= f.submit class: "btn btn-primary btn-sm" %>
   <% end %>
 </div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('form').on('submit', function(event) {
+      event.preventDefault();
+
+      var expenseParams = $(this).serialize();
+      console.log(this.action)
+      $.post(expenseParams, this.action);
+    })
+  });
+</script>
