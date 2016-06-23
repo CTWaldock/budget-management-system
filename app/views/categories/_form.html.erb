@@ -30,8 +30,11 @@
       event.preventDefault();
 
       var expenseParams = $(this).serialize();
-      console.log(this.action)
-      $.post(expenseParams, this.action);
-    })
+      var expensePost = $.post(this.action, expenseParams);
+
+      expensePost.done(function(data) {
+        console.log(data);
+      });
+    });
   });
 </script>
