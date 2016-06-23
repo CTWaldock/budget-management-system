@@ -1,5 +1,15 @@
 class ExpensesController < ApplicationController
 
+
+  def new
+    @expense = Expense.new(expense_params)
+    if @expense.save
+      redirect_to category_path(@expense.category)
+    else
+      render :new
+    end
+  end
+
   def create
     @category = Category.find(params[:category_id])
     @new_expense = @category.expenses.build(expense_params)

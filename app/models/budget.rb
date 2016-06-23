@@ -1,4 +1,6 @@
 class Budget < ActiveRecord::Base
+  has_many :category_budgets
+  has_many :categories, :through => :category_budgets
   belongs_to :user
   has_many :categories, :dependent => :destroy
   #destroy instead of delete_all as we want to trigger the callback on category to delete all expenses associated with said category

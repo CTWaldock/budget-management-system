@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   # categories and nested expense route
   resources :categories, only: [:destroy, :show] do
-    resources :expenses, only: [:create]
+    resources :expenses, only: [:create, :new]
   end
 
   # expenses
