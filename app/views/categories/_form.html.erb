@@ -33,6 +33,8 @@
 
         $('tbody').empty();
         $('form')[0].reset();
+        $('#error_message').text("");
+        $('#error_list').empty();
 
         var expenses = category.expenses
         for (var i = 0; i < expenses.length; i++) {
