@@ -7,9 +7,7 @@ class ExpensesController < ApplicationController
     if @new_expense.save
       render json: @new_expense, status: 201
     else
-      #need to obtain @expenses in order to render 'categories/show' properly in case of failure
-      @expenses = @category.expenses.order(:created_at => :desc)
-      render 'categories/show'
+      render json: { error: @new_expense.errors }, status: 422
     end
   end
 
