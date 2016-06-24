@@ -7,7 +7,7 @@ class ExpensesController < ApplicationController
     if @new_expense.save
       render json: @new_expense, status: 201
     else
-      render json: { error: @new_expense.errors }, status: 422
+      render json: { error: @new_expense.errors.full_messages }, status: 422
     end
   end
 

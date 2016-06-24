@@ -76,6 +76,16 @@ describe 'category page' do
     expect(@budget.expenses.last.description).to eq("Coke")
   end
 
+  it 'gives appropriate error messages when fields are not filled in' do
+    login_as(@user, :scope => :user)
+    visit category_path(@category)
+    click_button "Create Expense"
+
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Cost can't be blank")
+    expect(page).to have_content("Cost is not a number")
+  end
+
   it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly' do
     login_as(@user, :scope => :user)
     visit category_path(@category)
