@@ -33,7 +33,18 @@
       var expensePost = $.post(this.action, expenseParams);
 
       expensePost.done(function(data) {
-        console.log(data);
+        $('tbody').empty();
+        $('form')[0].reset();
+        for (var i = 0; i < data.length; i++) {
+          var expense = data[i];
+          console.log(expense);
+          var description = '<th scope="row">' + expense.description + '</th>';
+          var percentage = '<td>' + expense.percentage + '%</td>';
+          var cost = '<td>$' + expense.cost.toFixed(2) + '</td>';
+          var deleteLink = '<td><a rel="nofollow" data-method="delete" href="/expenses/' + expense.id + '">Delete Expense</a></td>';
+          var tableRow = ['<tr>', description, percentage, cost, deleteLink, '</tr>'].join("")
+          $('tbody').prepend(tableRow);
+        }
       }).fail(function(data) {
         console.log(data);
       });
