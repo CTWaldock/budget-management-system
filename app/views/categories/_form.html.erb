@@ -1,16 +1,9 @@
 <div class="center">
   <%= form_for([category, expense], :html => {class: "form-inline"})  do |f| %>
-    <% if expense.errors.any? %>
       <div id="error_explanation">
-        <h2>Please enter valid information.</h2>
-
-        <ul>
-          <% expense.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-            <% end %>
-        </ul>
+        <h2 id="error_message"></h2>
+        <ul id="error_list"></ul>
       </div>
-    <% end %>
 
     <div class="inline">
       <%= f.text_field :description, :placeholder => "Description" %>
@@ -51,8 +44,14 @@
           var tableRow = ['<tr>', description, percentage, cost, deleteLink, '</tr>'].join("")
           $('tbody').prepend(tableRow);
         }
-      }).fail(function(data) {
-        console.log(data);
+      }).fail(function(error) {
+        $('#error_message').text("Please enter valid information.");
+        $('#error_list').empty();
+        errors = JSON.parse(error.responseText).error;
+        for (var j = 0; j < errors.length; j++) {
+          var error = errors[j];
+          $('#error_list').append('<li>' + error + '</li>');
+        }
       });
     });
   });
