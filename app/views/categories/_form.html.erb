@@ -33,11 +33,15 @@
       var expensePost = $.post(this.action, expenseParams);
 
       expensePost.done(function(data) {
+        var category = data;
+        $('#cost').text("$" + category.subtotal.toFixed(2));
+        $('#current').text(category.current_percent + "%");
+        $('#total').text(category.total_percent + "%");
         $('tbody').empty();
         $('form')[0].reset();
-        for (var i = 0; i < data.length; i++) {
-          var expense = data[i];
-          console.log(expense);
+        var expenses = category.expenses
+        for (var i = 0; i < expenses.length; i++) {
+          var expense = expenses[i];
           var description = '<th scope="row">' + expense.description + '</th>';
           var percentage = '<td>' + expense.percentage + '%</td>';
           var cost = '<td>$' + expense.cost.toFixed(2) + '</td>';

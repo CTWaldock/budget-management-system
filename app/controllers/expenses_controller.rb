@@ -5,7 +5,7 @@ class ExpensesController < ApplicationController
     @new_expense = @category.expenses.build(expense_params)
     authorize @new_expense
     if @new_expense.save
-      render json: @category.expenses, status: 201
+      render json: @category, status: 201
     else
       render json: { error: @new_expense.errors.full_messages }, status: 422
     end
