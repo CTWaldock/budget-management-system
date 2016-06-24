@@ -20,4 +20,4 @@
 /config/application.yml
 
 /notes.md
-/blog_notes.pages
+blog/*
