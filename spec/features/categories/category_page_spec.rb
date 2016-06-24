@@ -69,7 +69,7 @@ describe 'category page' do
     click_button "Create Expense"
 
     expect(page).to have_content("Coke")
-    expect(page).to have_content("$25.00")
+    expect(page).to have_content("25.0")
 
     @budget.reload
     expect(@budget.total_expense).to eq(25)
