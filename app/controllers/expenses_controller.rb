@@ -5,7 +5,7 @@ class ExpensesController < ApplicationController
     @new_expense = @category.expenses.build(expense_params)
     authorize @new_expense
     if @new_expense.save
-      redirect_to category_path(@category)
+      render json: @new_expense, status: 201
     else
       #need to obtain @expenses in order to render 'categories/show' properly in case of failure
       @expenses = @category.expenses.order(:created_at => :desc)
