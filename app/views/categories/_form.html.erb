@@ -37,8 +37,10 @@
         $('#cost').text("$" + category.subtotal.toFixed(2));
         $('#current').text(category.current_percent + "%");
         $('#total').text(category.total_percent + "%");
+        
         $('tbody').empty();
         $('form')[0].reset();
+
         var expenses = category.expenses
         for (var i = 0; i < expenses.length; i++) {
           var expense = expenses[i];
