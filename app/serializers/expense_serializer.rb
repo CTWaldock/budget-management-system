@@ -1,8 +1,8 @@
 class ExpenseSerializer < ActiveModel::Serializer
-  attributes :id, :cost, :description
+  attributes :id, :cost, :description, :percentage
 
-  def category_percentage
+  def percentage
     object.category_percentage
   end
-  
+
 end
