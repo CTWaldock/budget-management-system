@@ -26,27 +26,27 @@
       var expensePost = $.post(this.action, expenseParams);
 
       expensePost.done(function(data) {
-        console.log(data);
-        // var category = data;
-        // $('#cost').text("$" + category.subtotal.toFixed(2));
-        // $('#current').text(category.current_percent + "%");
-        // $('#total').text(category.total_percent + "%");
-        //
-        // $('tbody').empty();
-        // $('form')[0].reset();
-        // $('#error_message').text("");
-        // $('#error_list').empty();
-        //
-        // var expenses = category.expenses
-        // for (var i = 0; i < expenses.length; i++) {
-        //   var expense = expenses[i];
-        //   var description = '<th scope="row">' + expense.description + '</th>';
-        //   var percentage = '<td>' + expense.percentage + '%</td>';
-        //   var cost = '<td>$' + expense.cost.toFixed(2) + '</td>';
-        //   var deleteLink = '<td><a rel="nofollow" data-method="delete" href="/expenses/' + expense.id + '">Delete Expense</a></td>';
-        //   var tableRow = ['<tr>', description, percentage, cost, deleteLink, '</tr>'].join("")
-        //   $('tbody').prepend(tableRow);
-        // }
+        category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
+        console.log(category)
+        $('#cost').text("$" + category.subtotal.toFixed(2));
+        $('#current').text(category.current_percent() + "%");
+        $('#total').text(category.total_percent() + "%");
+
+        $('tbody').empty();
+        $('form')[0].reset();
+        $('#error_message').text("");
+        $('#error_list').empty();
+
+        var expenses = category.expenses
+        for (var i = 0; i < expenses.length; i++) {
+          var expense = expenses[i];
+          var description = '<th scope="row">' + expense.description + '</th>';
+          var percentage = '<td>' + expense.percentage() + '%</td>';
+          var cost = '<td>$' + expense.cost.toFixed(2) + '</td>';
+          var deleteLink = '<td><a rel="nofollow" data-method="delete" href="/expenses/' + expense.id + '">Delete Expense</a></td>';
+          var tableRow = ['<tr>', description, percentage, cost, deleteLink, '</tr>'].join("")
+          $('tbody').prepend(tableRow);
+        }
       }).fail(function(error) {
         $('#error_message').text("Please enter valid information.");
         $('#error_list').empty();
