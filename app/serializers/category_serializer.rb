@@ -1,12 +1,5 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :subtotal, :current_percent, :total_percent
+  attributes :id, :subtotal
   has_many :expenses
-  def current_percent
-    object.current_percentage
-  end
-
-  def total_percent
-    object.total_percentage
-  end
-
+  has_one :budget
 end
