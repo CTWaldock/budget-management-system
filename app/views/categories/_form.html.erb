@@ -41,12 +41,7 @@
     updateCategory(category);
     resetExpense();
     resetErrors();
-
-    var expenses = category.expenses
-    for (var i = 0; i < expenses.length; i++) {
-      var expense = expenses[i];
-      addExpenseRow(expense);
-    }
+    fillExpenseTable(category);
   }
 
   function updateCategory(category) {
@@ -65,6 +60,14 @@
     $('form')[0].reset();
   }
 
+  function fillExpenseTable(category) {
+    var expenses = category.expenses
+    for (var i = 0; i < expenses.length; i++) {
+      var expense = expenses[i];
+      addExpenseRow(expense);
+    }
+  }
+
   function addExpenseRow(expense) {
     var description = '<th scope="row">' + expense.description + '</th>';
     var percentage = '<td>' + expense.percentage() + '%</td>';
@@ -76,8 +79,11 @@
 
   function handleExpenseError(error) {
     resetErrors();
+    addErrors(JSON.parse(error.responseText).error);
+  }
+
+  function addErrors(errors) {
     $('#error_message').text("Please enter valid information.");
-    errors = JSON.parse(error.responseText).error;
     for (var j = 0; j < errors.length; j++) {
       var error = errors[j];
       $('#error_list').append('<li>' + error + '</li>');
