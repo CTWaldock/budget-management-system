@@ -6,6 +6,10 @@ class BudgetsController < ApplicationController
     @active_budgets = current_user.budgets.active
     @inactive_budgets = current_user.budgets.inactive
     @completed_budgets = current_user.budgets.completed
+    respond_to do |f|
+      f.html
+      f.json { render :json => {active: @active_budgets, inactive: @inactive_budgets, completed: @completed_budgets} }
+    end
   end
 
   def new
