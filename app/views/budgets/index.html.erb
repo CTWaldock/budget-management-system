@@ -4,17 +4,17 @@
     <h2><%= link_to "Create a New Budget", new_budget_path %></h2>
     <br>
     <div id="active">
-      <h3>Active Budgets</h3>
+
     </div>
 
     <br>
     <div id="inactive">
-      <h3>Inactive Budgets</h3>
+
     </div>
 
     <br>
     <div id="completed">
-      <h3>Completed Budgets</h3>
+
     </div>
 
 
@@ -24,8 +24,6 @@
 
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
-    $.get('/user/budgets', function(data) {
-      console.log(data.active);
-    }, "JSON")
-  })
+    populateIndex();
+  });
 </script>
