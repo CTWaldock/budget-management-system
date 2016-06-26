@@ -1,35 +1,37 @@
-<h1>Expense Report for <%= @budget.name %></h1>
-<h4><%= show_budget_status(@budget) %></h4>
-<h4><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h4>
-<h4 class="warning"><%= link_to "Delete Budget", budget_path(@budget), :method => :delete %></h4>
-<% if @budget.exceeded? %>
-  <h3 class="warning">Budget Has Been Exceeded</h3>
-<% end %>
+<div id="content">
+  <h1>Expense Report for <%= @budget.name %></h1>
+  <h4><%= show_budget_status(@budget) %></h4>
+  <h4><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h4>
+  <h4 class="warning"><%= link_to "Delete Budget", budget_path(@budget), :method => :delete %></h4>
+  <% if @budget.exceeded? %>
+    <h3 class="warning">Budget Has Been Exceeded</h3>
+  <% end %>
 
-<br>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <br>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
 
 
 
-    <h4>Expenditure Limit: <%= number_to_currency(@budget.limit) %></h4>
-    <h4>Current Expenditure: <%= number_to_currency(@budget.total_expense) %></h4>
-    <h4>Remaining Expenditure: <%= number_to_currency(@budget.remaining_expense) %></h4>
+      <h4>Expenditure Limit: <%= number_to_currency(@budget.limit) %></h4>
+      <h4>Current Expenditure: <%= number_to_currency(@budget.total_expense) %></h4>
+      <h4>Remaining Expenditure: <%= number_to_currency(@budget.remaining_expense) %></h4>
 
-    <br>
-    <p><%= show_budget_recommendation(@budget) %></p>
+      <br>
+      <p><%= show_budget_recommendation(@budget) %></p>
 
-    <p> Add and delete expenses by clicking on one of the categories below.</p>
-    <h3> Categorical Breakdown </h3>
+      <p> Add and delete expenses by clicking on one of the categories below.</p>
+      <h3> Categorical Breakdown </h3>
 
-      <%= render partial: "budgets/categories", locals: { categories: @budget.ordered_categories } %>
+        <%= render partial: "budgets/categories", locals: { categories: @budget.ordered_categories } %>
 
-    <h3> Top Five Expenses </h3>
-      <%= render partial: "budgets/expenses", locals: { expenses: @budget.top_five_expenses } %>
+      <h3> Top Five Expenses </h3>
+        <%= render partial: "budgets/expenses", locals: { expenses: @budget.top_five_expenses } %>
 
-    <h3> Most Recent Expenses </h3>
-      <%= render partial: "budgets/expenses", locals: { expenses: @budget.most_recent_expenses } %>
+      <h3> Most Recent Expenses </h3>
+        <%= render partial: "budgets/expenses", locals: { expenses: @budget.most_recent_expenses } %>
 
+    </div>
   </div>
 </div>
 
@@ -38,8 +40,36 @@
     $('.category a').on('click', function(event) {
       event.preventDefault();
       $.get(this.href, function(data) {
+        $('#content').empty();
+        $('#content').html(showHTML);
         console.log(data);
       });
     });
   });
+
+  var showHTML = '<h1 id="categoryname"></h1> \
+<h4 id="budgetlink"></h4> \
+  <h4 id="deletebudgetlink"></h4> \
+  <br> \
+  <h4>Add Expense</h4> \
+  <div class="row"> \
+    <div class="col-md-6 col-md-offset-3"> \
+      <br></br> \
+      <p>Total costs amount to <span id="cost"></span>.</p> \
+      <p>Represents <span id="current"></span> of current budget expenditure for <span id="budgetname"></span></p> \
+      <p>Represents <span id="total"></span> of maximum budget expenditure for <span id="categoryname"></span></p> \
+      <table class="table"> \
+        <thead> \
+          <tr> \
+            <th class="col-md-3">Description</th> \
+            <th class="col-md-3">% of Category Subtotal</th> \
+            <th class="col-md-3">Cost</th> \
+            <th class="col-md-1">Actions</th> \
+          </tr> \
+        </thead> \
+        <tbody> \
+        </tbody> \
+      </table> \
+    </div> \
+  </div>'
 </script>
