@@ -1,4 +1,5 @@
-function Budget (id, limit, totalExpense, category) {
+function Budget (name, id, limit, totalExpense, category) {
+  this.name = name;
   this.id = id;
   this.limit = limit;
   this.totalExpense = totalExpense;
