@@ -5,7 +5,7 @@ function bindExpenseForm() {
     var expensePost = $.post(this.action, expenseParams);
 
     expensePost.done(function(data) {
-      handleExpenseSuccess(data);
+      fillVariableInfo(data);
     }).fail(function(error) {
       handleExpenseError(error);
     });
@@ -20,13 +20,13 @@ function bindDeleteLinks() {
       url: link,
       type: 'DELETE',
       success: function(data) {
-        handleExpenseSuccess(data)
+        fillVariableInfo(data)
       }
     });
   });
 }
 
-function handleExpenseSuccess(data) {
+function fillVariableInfo(data) {
   category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
   updateCategory(category);
   resetExpense();
@@ -79,4 +79,17 @@ function addErrors(errors) {
     var error = errors[j];
     $('#error_list').append('<li>' + error + '</li>');
   }
+}
+
+function replaceContent() {
+  $('#content').empty();
+  $('#content').html(showHTML);
+}
+
+function fillStaticInfo(data) {
+  $('#new_expense').attr("action", "/categories/" + data.id + "/expenses");
+  $('#budgetlink').append('<a href="/budgets/' + data.budget.id + '">Return to Budget</a>');
+  $('#deletecategorylink').append('<a href="/categories/' + data.id + '" data-method="delete">Delete this Category</a>');
+  $('.category.name').text(data.title);
+  $('.budget.name').text(data.budget.name);
 }
