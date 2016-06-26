@@ -81,11 +81,6 @@ function addErrors(errors) {
   }
 }
 
-function replaceContent() {
-  $('#content').empty();
-  $('#content').html(showHTML);
-}
-
 function fillStaticInfo(data) {
   $('#new_expense').attr("action", "/categories/" + data.id + "/expenses");
   $('#budgetlink').append('<a href="/budgets/' + data.budget.id + '">Return to Budget</a>');
