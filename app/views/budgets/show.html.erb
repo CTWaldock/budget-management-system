@@ -43,15 +43,20 @@
         $('#content').empty();
         $('#content').html(showHTML);
         $('#new_expense').attr("action", "/categories/" + data.id + "/expenses");
+        $('#budgetlink').append('<a href="/budgets/' + data.budget.id + '">Return to Budget</a>');
+        $('#deletecategorylink').append('<a href="/categories/' + data.id + '" data-method="delete">Delete this Category</a>');
+        $('.category.name').text(data.title);
+        $('.budget.name').text(data.budget.name);
         bindExpenseForm();
-        console.log(data.id);
+        handleExpenseSuccess(data);
+        console.log(data);
       });
     });
   });
 
-  var showHTML = '<h1 id="categoryname"></h1>\
+  var showHTML = '<h1 class="category name"></h1>\
   <h4 id="budgetlink"></h4>\
-  <h4 id="deletebudgetlink"></h4>\
+  <h4 id="deletecategorylink" class="warning"></h4>\
   <br>\
   <h4>Add Expense</h4>\
   <div class="row">\
@@ -71,8 +76,8 @@
       </form>\
       <br></br>\
       <p>Total costs amount to <span id="cost"></span>.</p>\
-      <p>Represents <span id="current"></span> of current budget expenditure for <span id="budgetname"></span></p>\
-      <p>Represents <span id="total"></span> of maximum budget expenditure for <span id="categoryname"></span></p>\
+      <p>Represents <span id="current"></span> of current budget expenditure for <span class="budget name"></span>.</p>\
+      <p>Represents <span id="total"></span> of maximum budget expenditure for <span class="budget name"></span>.</p>\
       <table class="table">\
         <thead>\
           <tr>\

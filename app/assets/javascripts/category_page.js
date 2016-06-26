@@ -37,8 +37,8 @@ function handleExpenseSuccess(data) {
 
 function updateCategory(category) {
   $('#cost').text("$" + category.subtotal.toFixed(2));
-  $('#current').text(category.current_percent() + "%");
-  $('#total').text(category.total_percent() + "%");
+  $('#current').text(category.currentPercent() + "%");
+  $('#total').text(category.totalPercent() + "%");
 }
 
 function resetErrors() {

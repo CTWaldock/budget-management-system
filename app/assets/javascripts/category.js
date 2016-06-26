@@ -11,10 +11,15 @@ function Category (id, title, subtotal, budget, expenses) {
   };
 }
 
-Category.prototype.current_percent = function() {
-  return Math.round(this.subtotal * 100 / this.budget.totalExpense);
+Category.prototype.currentPercent = function() {
+  if (this.budget.totalExpense > 0) {
+    return Math.round(this.subtotal * 100 / this.budget.totalExpense);
+  } else {
+    return 0;
+  }
+
 }
 
-Category.prototype.total_percent = function() {
+Category.prototype.totalPercent = function() {
   return Math.round(this.subtotal * 100 / this.budget.limit);
 }
