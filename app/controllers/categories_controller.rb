@@ -3,8 +3,7 @@ class CategoriesController < ApplicationController
   def show
     @category = Category.find(params[:id])
     authorize @category
-    @expenses = @category.expenses.order(:created_at => :desc)
-    @new_expense = @category.expenses.build
+    render json: @category
   end
 
   def destroy

@@ -12,7 +12,7 @@ function populateIndex() {
 function insertBudgets(budgetList, selector) {
   $.each(budgetList, function(index, params) {
     var budget = new Budget(params.name, params.id, params.limit, params.total_expense);
-    $(selector).append('<a href="/budgets/' + budget.id + '"<p>' + budget.name + '</p></a>');
+    $(selector).append('<a href="/budgets/' + budget.id + '"><p>' + budget.name + '</p></a>');
     if (budget.exceeded()) {
       $(selector).children().last().addClass("warning");
     }
