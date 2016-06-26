@@ -10,7 +10,7 @@
   <tbody>
     <% expenses.each do |expense| %>
       <tr>
-        <th scope="row"><%= link_to expense.category.title, category_path(expense.category) %></th>
+        <th scope="row" class="category"><%= link_to expense.category.title, category_path(expense.category) %></th>
         <td><%= expense.description %></td>
         <td><%= number_to_percentage(expense.category_percentage, precision: 0)%></td>
         <td><%= number_to_currency(expense.cost) %></td>
