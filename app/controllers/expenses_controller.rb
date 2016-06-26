@@ -16,7 +16,7 @@ class ExpensesController < ApplicationController
     @category = @expense.category
     authorize @expense
     @expense.destroy
-    redirect_to category_path(@category)
+    render json: @category, status: 200
   end
 
   private

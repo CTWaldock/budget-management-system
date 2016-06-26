@@ -13,7 +13,7 @@
         <th scope="row"><%= expense.description %></th>
         <td><%= number_to_percentage(expense.category_percentage, precision: 0)%></td>
         <td><%= number_to_currency(expense.cost) %></td>
-        <td><%=link_to "Delete Expense", expense_path(expense), :method => :delete %></td>
+        <td><%=link_to "Delete Expense", expense_path(expense) %></td>
       </tr>
     <% end %>
   </tbody>
