@@ -42,9 +42,9 @@ class BudgetsController < ApplicationController
     @budget = Budget.find(params[:id])
     authorize @budget
     if @budget.update(budget_params)
-      redirect_to budget_path(@budget)
+      render :show, layout: false
     else
-      render :edit
+      render :edit, layout: false, status: 422
     end
   end
 
