@@ -21,8 +21,11 @@ function resetErrors() {
   $('#error_list').empty();
 }
 
-function resetExpense() {
+function resetExpenseTable() {
   $('tbody').empty();
+}
+
+function resetExpenseInput() {
   $('form')[0].reset();
 }
 
