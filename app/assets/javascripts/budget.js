@@ -29,6 +29,7 @@ function insertBudgets(budgetList, selector) {
   $.each(budgetList, function(index, params) {
     var budget = new Budget(params.name, params.id, params.limit, params.total_expense);
     $(selector).append(budget.showLink());
+    // turn link red if budget is exceeded
     if (budget.exceeded()) {
       $(selector).children().last().addClass("warning");
     }

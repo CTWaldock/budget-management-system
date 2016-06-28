@@ -57,7 +57,7 @@ function bindExpenseForm() {
       category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
       updateCategory(category);
       fillExpenseTable(category);
-      bindDeleteLinks();
+      bindDeleteLinks(); // need to rebind delete links as the table was deleted
     }).fail(function(error) {
       resetErrors();
       addErrors(JSON.parse(error.responseText).error);
@@ -76,7 +76,7 @@ function bindDeleteLinks() {
         resetExpenseTable();
         category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
         updateCategory(category);
-        fillExpenseTable(category);
+        fillExpenseTable(category); // need to rebind delete links as the table was deleted
         bindDeleteLinks();
       }
     });

@@ -2,9 +2,10 @@ function Category (id, title, subtotal, budget, expenses) {
   this.id = id;
   this.title = title;
   this.subtotal = subtotal;
-  this.budget = new Budget(budget.name, budget.id, budget.limit, budget.total_expense, this);
+  this.budget = new Budget(budget.name, budget.id, budget.limit, budget.total_expense);
   this.expenses = []
   for (var i = 0; i < expenses.length; i++) {
+    // need expense to know category to calculate percentage but also need category to know expenses to create table
     var expense = new Expense(expenses[i].id, expenses[i].cost, expenses[i].description);
     expense.category = this;
     this.expenses.push(expense);
@@ -24,8 +25,6 @@ Category.prototype.totalPercent = function() {
   return Math.round(this.subtotal * 100 / this.budget.limit);
 }
 
-
-
 function updateCategory(category) {
   $('#cost').text("$" + category.subtotal.toFixed(2));
   $('#current').text(category.currentPercent() + "%");
@@ -43,17 +42,18 @@ function fillCategoryLinks(category) {
   $('#deletecategorylink').append('<a href="/categories/' + category.id + '" data-method="delete">Delete this Category</a>');
 }
 
-function replaceContent(data) {
+function replaceContent() {
   $('#content').empty();
   $('#content').html(categoryShow);
 }
 
+// if the user clicks on a category link, clear the page, add info regarding category, and bind the expense form and delete links
 function bindCategoryLinks() {
   $('.category a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href, function(data) {
       category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
-      replaceContent(data);
+      replaceContent();
       fillStaticCategoryInfo(category);
       fillCategoryLinks(category);
       updateCategory(category);
