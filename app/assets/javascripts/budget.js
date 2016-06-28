@@ -55,3 +55,21 @@ function bindBudgetNewLink() {
     });
   });
 }
+
+function bindBudgetForm() {
+  $('#new_budget').on('submit', function(event) {
+    event.preventDefault();
+    budgetParams = $(this).serialize();
+    budgetPost = $.post(this.action, budgetParams);
+    budgetPost.success(function(data) {
+      console.log("Success triggered.")
+      replaceContent(data);
+      bindCategoryShowLinks();
+    });
+    budgetPost.fail(function(error) {
+      console.log("Failure triggered.")
+      replaceContent(data);
+      bindBudgetForm();
+    });
+  });
+}

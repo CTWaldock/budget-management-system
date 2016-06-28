@@ -20,9 +20,9 @@ class BudgetsController < ApplicationController
   def create
     @budget = current_user.budgets.build(budget_params)
     if @budget.save
-      redirect_to budget_path(@budget)
+      render :show, layout: false, status: 201
     else
-      render :new
+      render :new, layout: false, status: 422
     end
   end
 
