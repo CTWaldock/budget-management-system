@@ -1,9 +1,9 @@
 function replaceContent(data) {
   $('#content').empty();
   $('#content').html(categoryShow);
-  fillStaticInfo(data); // see category_page.js
+  fillStaticCategoryInfo(data); // see category_page.js
   bindExpenseForm(); // see category_page.js
-  fillVariableInfo(data); // see category_page.js
+  fillVariableCategoryInfo(data); // see category_page.js
 }
 
 function bindCategoryLinks() {

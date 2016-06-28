@@ -26,7 +26,7 @@ function resetExpenseTable() {
 }
 
 function resetExpenseInput() {
-  $('form')[0].reset();
+  $('#new_expense')[0].reset();
 }
 
 function handleExpenseError(error) {
@@ -57,7 +57,7 @@ function bindExpenseForm() {
     var expensePost = $.post(this.action, expenseParams);
 
     expensePost.done(function(data) {
-      fillVariableInfo(data);
+      fillVariableCategoryInfo(data);
     }).fail(function(error) {
       handleExpenseError(error);
     });
@@ -72,7 +72,7 @@ function bindDeleteLinks() {
       url: link,
       type: 'DELETE',
       success: function(data) {
-        fillVariableInfo(data)
+        fillVariableCategoryInfo(data)
       }
     });
   });

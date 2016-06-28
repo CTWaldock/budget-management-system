@@ -1,6 +1,6 @@
 
 
-function fillVariableInfo(data) {
+function fillVariableCategoryInfo(data) {
   category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
   updateCategory(category);
   resetExpenseTable();
@@ -16,7 +16,7 @@ function updateCategory(category) {
   $('#total').text(category.totalPercent() + "%");
 }
 
-function fillStaticInfo(data) {
+function fillStaticCategoryInfo(data) {
   $('#new_expense').attr("action", "/categories/" + data.id + "/expenses");
   $('#budgetlink').append('<a href="/budgets/' + data.budget.id + '">Return to Budget</a>');
   $('#deletecategorylink').append('<a href="/categories/' + data.id + '" data-method="delete">Delete this Category</a>');
