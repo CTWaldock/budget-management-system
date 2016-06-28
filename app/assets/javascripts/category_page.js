@@ -16,10 +16,13 @@ function updateCategory(category) {
   $('#total').text(category.totalPercent() + "%");
 }
 
-function fillStaticCategoryInfo(data) {
-  $('#new_expense').attr("action", "/categories/" + data.id + "/expenses");
-  $('#budgetlink').append('<a href="/budgets/' + data.budget.id + '">Return to Budget</a>');
-  $('#deletecategorylink').append('<a href="/categories/' + data.id + '" data-method="delete">Delete this Category</a>');
-  $('.category.name').text(data.title);
-  $('.budget.name').text(data.budget.name);
+function fillStaticCategoryInfo(category) {
+  $('.category.name').text(category.title);
+  $('.budget.name').text(category.budget.name);
+}
+
+function fillCategoryLinks(category) {
+  $('#new_expense').attr("action", "/categories/" + category.id + "/expenses");
+  $('#budgetlink').append('<a href="/budgets/' + category.budget.id + '">Return to Budget</a>');
+  $('#deletecategorylink').append('<a href="/categories/' + category.id + '" data-method="delete">Delete this Category</a>');
 }
