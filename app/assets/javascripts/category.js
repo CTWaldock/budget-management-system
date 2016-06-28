@@ -57,6 +57,7 @@ function bindCategoryDeleteLinks() {
       success: function(data) {
         replaceContent(data);
         bindCategoryShowLinks();
+        bindBudgetEditLink();
       }
     });
   });

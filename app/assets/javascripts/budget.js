@@ -42,6 +42,7 @@ function bindBudgetShowLinks() {
     $.get(this.href).success(function(data) {
       replaceContent(data);
       bindCategoryShowLinks();
+      bindBudgetEditLink();
     });
   });
 }
@@ -51,12 +52,43 @@ function bindBudgetNewLink() {
     event.preventDefault();
     $.get(this.href).success(function(data) {
       replaceContent(data);
-      bindBudgetForm();
+      bindNewBudgetForm();
     });
   });
 }
 
-function bindBudgetForm() {
+function bindBudgetEditLink() {
+  $('.edit_budget a').on('click', function(event) {
+    event.preventDefault();
+    $.get(this.href).success(function(data) {
+      replaceContent(data);
+      bindEditBudgetForm();
+    })
+  })
+}
+
+function bindEditBudgetForm() {
+  $('.edit_budget').on('submit', function(event) {
+    event.prevaultDefault();
+    budgetParams = $(this).serialize();
+    $.ajax({
+      url: this.action,
+      type: 'PUT',
+      data: budgetParams,
+      success: function(data) {
+        replaceContent(data);
+        bindCategoryShowLinks();
+        bindBudgetEditLink();
+      },
+      error: function(data) {
+        replaceContent(error.responseText);
+        bindEditBudgetForm();
+      }
+    })
+  })
+}
+
+function bindNewBudgetForm() {
   $('#new_budget').on('submit', function(event) {
     event.preventDefault();
     budgetParams = $(this).serialize();
@@ -65,11 +97,12 @@ function bindBudgetForm() {
       console.log("Success triggered.")
       replaceContent(data);
       bindCategoryShowLinks();
+      bindBudgetEditLink();
     });
     budgetPost.fail(function(error) {
       console.log("Failure triggered.")
-      replaceContent(data);
-      bindBudgetForm();
+      replaceContent(error.responseText);
+      bindNewBudgetForm();
     });
   });
 }

@@ -1,7 +1,7 @@
 
   <h1>Expense Report for <%= @budget.name %></h1>
   <h4><%= show_budget_status(@budget) %></h4>
-  <h4><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h4>
+  <h4 class="edit_budget"><%= link_to "Edit Budget Specifications", edit_budget_path(@budget) %></h4>
   <h4 class="warning"><%= link_to "Delete Budget", budget_path(@budget), :method => :delete %></h4>
   <% if @budget.exceeded? %>
     <h3 class="warning">Budget Has Been Exceeded</h3>
