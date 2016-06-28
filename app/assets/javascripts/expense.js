@@ -54,7 +54,6 @@ function bindExpenseForm() {
       resetErrors();
       resetExpenseTable();
       resetExpenseInput();
-      console.log(data);
       category = new Category(data);
       updateCategory(category);
       fillExpenseTable(category);

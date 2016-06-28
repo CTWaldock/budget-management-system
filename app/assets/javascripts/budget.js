@@ -29,8 +29,6 @@ function insertBudgets(budgetList, selector) {
     var budget = new Budget(params);
     $(selector).append(budget.showLink());
     // turn link red if budget is exceeded
-    console.log(budget);
-    console.log(budget.exceeded());
     if (budget.exceeded()) {
       $(selector).children().last().addClass("warning");
     }
