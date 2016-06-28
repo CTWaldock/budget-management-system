@@ -38,8 +38,9 @@ function fillStaticCategoryInfo(category) {
 
 function fillCategoryLinks(category) {
   $('#new_expense').attr("action", "/categories/" + category.id + "/expenses");
-  $('#budgetlink').append('<a href="/budgets/' + category.budget.id + '">Return to Budget</a>');
+  $('.budget_link').append('<a href="/budgets/' + category.budget.id + '">Return to Budget</a>');
   $('#deletecategorylink').append('<a href="/categories/' + category.id + '" data-method="delete">Delete this Category</a>');
+  bindBudgetLinks();
 }
 
 function insertCategoryHTML() {
@@ -67,7 +68,7 @@ function bindCategoryLinks() {
 // HTML to be inserted when category link is clicked. Model information is added via JSON + jQuery.
 
 var categoryHTML = '<h1 class="category name"></h1>\
-<h4 id="budgetlink"></h4>\
+<h4 class="budget_link"></h4>\
 <h4 id="deletecategorylink" class="warning"></h4>\
 <br>\
 <h4>Add Expense</h4>\

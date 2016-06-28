@@ -37,7 +37,7 @@ function insertBudgets(budgetList, selector) {
 }
 
 function bindBudgetLinks() {
-  $('#budget_links a').on('click', function(event) {
+  $('.budget_link a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href).success(function(data) {
       insertBudgetContent(data);
@@ -50,7 +50,3 @@ function insertBudgetContent(data) {
   $('#content').html(data);
   bindCategoryLinks();
 }
-
-$(document).ready(function() {
-  populateIndex();
-});
