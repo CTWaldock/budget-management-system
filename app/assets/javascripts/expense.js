@@ -46,11 +46,10 @@ function addErrors(errors) {
 }
 
 function bindExpenseForm() {
-  $('form').on('submit', function(event) {
+  $('#new_expense').on('submit', function(event) {
     event.preventDefault();
     var expenseParams = $(this).serialize();
     var expensePost = $.post(this.action, expenseParams);
-
     expensePost.done(function(data) {
       resetErrors();
       resetExpenseTable();
@@ -78,7 +77,7 @@ function bindDeleteLinks() {
         category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
         updateCategory(category);
         fillExpenseTable(category);
-        bindDeleteLinks();    
+        bindDeleteLinks();
       }
     });
   });
