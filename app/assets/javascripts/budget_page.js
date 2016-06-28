@@ -1,16 +1,19 @@
 function replaceContent(data) {
   $('#content').empty();
   $('#content').html(categoryShow);
-  fillStaticCategoryInfo(data); // see category_page.js
-  bindExpenseForm(); // see category_page.js
-  fillVariableCategoryInfo(data); // see category_page.js
 }
 
 function bindCategoryLinks() {
   $('.category a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href, function(data) {
+      category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
       replaceContent(data);
+      fillStaticCategoryInfo(category);
+      updateCategory(category);
+      fillExpenseTable(category);
+      bindExpenseForm();
+      bindDeleteLinks();
     });
   });
 }
