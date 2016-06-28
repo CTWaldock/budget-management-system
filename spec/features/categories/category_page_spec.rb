@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'category page' do
 
-
   before do
+    Capybara.current_driver = :selenium
     @user = FactoryGirl.create(:user)
     @budget = FactoryGirl.create(:budget, user: @user, limit: 100)
     @category = @budget.categories.first

@@ -38,6 +38,8 @@ gem 'bootswatch-rails'
 
 gem 'active_model_serializers'
 
+gem 'selenium-webdriver'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
