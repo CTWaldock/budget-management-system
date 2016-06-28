@@ -46,18 +46,12 @@ function bindBudgetShowLinks() {
   });
 }
 
-function replaceContent(data) {
-  $('#content').empty();
-  $('#content').html(data);
-}
-
 function bindBudgetNewLink() {
   $('.new_budget a').on('click', function(event) {
     event.preventDefault();
-    $.get(this.href).success(funtion(data) {
+    $.get(this.href).success(function(data) {
       replaceContent(data);
       bindBudgetForm();
-      }
-    })
-  })
+    });
+  });
 }

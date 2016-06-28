@@ -1,3 +1,8 @@
+
+
+
+
+
 function Category(params) {
   this.id = params.id;
   this.title = params.title;
@@ -42,11 +47,6 @@ function fillCategoryLinks(category) {
   $('#deletecategorylink').append('<a href="/categories/' + category.id + '">Delete this Category</a>');
 }
 
-function insertCategoryHTML() {
-  $('#content').empty();
-  $('#content').html(categoryHTML);
-}
-
 function bindCategoryDeleteLinks() {
   $('#deletecategorylink a').on('click', function(evnet) {
     event.preventDefault();
@@ -57,7 +57,8 @@ function bindCategoryDeleteLinks() {
       type: 'DELETE',
       success: function(data) {
         console.log(data);
-        insertBudgetContent(data);
+        replaceContent(data);
+        bindCategoryShowLinks();
       }
     });
   });
@@ -69,7 +70,7 @@ function bindCategoryShowLinks() {
     event.preventDefault();
     $.get(this.href, function(data) {
       category = new Category(data)
-      insertCategoryHTML();
+      replaceContent(categoryHTML);
       fillStaticCategoryInfo(category);
       fillCategoryLinks(category);
       bindBudgetShowLinks();

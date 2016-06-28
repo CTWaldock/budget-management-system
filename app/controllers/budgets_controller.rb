@@ -14,6 +14,7 @@ class BudgetsController < ApplicationController
 
   def new
     @budget = current_user.budgets.build
+    render layout: false
   end
 
   def create

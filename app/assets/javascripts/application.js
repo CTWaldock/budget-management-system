@@ -15,3 +15,9 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+
+function replaceContent(data) {
+  $('#content').empty();
+  $('#content').html(data);
+}
