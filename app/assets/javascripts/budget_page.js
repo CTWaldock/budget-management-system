@@ -10,6 +10,7 @@ function bindCategoryLinks() {
       category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
       replaceContent(data);
       fillStaticCategoryInfo(category);
+      fillCategoryLinks(category);
       updateCategory(category);
       fillExpenseTable(category);
       bindExpenseForm();
