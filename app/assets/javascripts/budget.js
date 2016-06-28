@@ -1,9 +1,9 @@
-function Budget (name, id, limit, totalExpense, category) {
+function Budget (name, id, limit, totalExpense) {
   this.name = name;
   this.id = id;
   this.limit = limit;
   this.totalExpense = totalExpense;
-  this.category = category;
+
 }
 
 Budget.prototype.exceeded = function() {
@@ -11,7 +11,7 @@ Budget.prototype.exceeded = function() {
 }
 
 Budget.prototype.showLink = function() {
-  return '<a href="/budgets/' + this.id + '"><p>' + this.name + '</p></a>'
+  return '<a href="/budgets/' + this.id + '"><p>' + this.name + '</p></a>';
 }
 
 function populateIndex() {

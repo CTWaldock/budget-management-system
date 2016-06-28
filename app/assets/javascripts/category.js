@@ -12,6 +12,7 @@ function Category (id, title, subtotal, budget, expenses) {
 }
 
 Category.prototype.currentPercent = function() {
+  // catch any budgets that would cause division by zero errors
   if (this.budget.totalExpense > 0) {
     return Math.round(this.subtotal * 100 / this.budget.totalExpense);
   } else {
