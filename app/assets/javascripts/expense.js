@@ -9,10 +9,10 @@ Expense.prototype.percentage = function() {
 }
 
 Expense.prototype.expenseRow = function() {
-  var description = '<th scope="row">' + expense.description + '</th>';
-  var percentage = '<td>' + expense.percentage() + '%</td>';
-  var cost = '<td>$' + expense.cost.toFixed(2) + '</td>';
-  var deleteLink = '<td><a href="/expenses/' + expense.id + '">Delete Expense</a></td>';
+  var description = '<th scope="row">' + this.description + '</th>';
+  var percentage = '<td>' + this.percentage() + '%</td>';
+  var cost = '<td>$' + this.cost.toFixed(2) + '</td>';
+  var deleteLink = '<td><a href="/expenses/' + this.id + '">Delete Expense</a></td>';
   return ['<tr>', description, percentage, cost, deleteLink, '</tr>'].join("")
 }
 
@@ -38,7 +38,6 @@ function fillExpenseTable(category) {
     $('tbody').prepend(expense.expenseRow());
   }
 }
-
 
 function addErrors(errors) {
   $('#error_message').text("Please enter valid information.");
