@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
     @budget = @category.budget
     authorize @category
     @category.destroy
-    redirect_to @budget
+    render 'budgets/show', layout: false
   end
 
 end

@@ -21,7 +21,7 @@ function populateIndex() {
     insertBudgets(data.inactive, "#inactive");
     $("#completed").append('<h3>Completed Budgets</h3>');
     insertBudgets(data.completed, "#completed");
-    bindBudgetLinks();
+    bindBudgetShowLinks();
   }, "JSON")
 }
 
@@ -36,7 +36,7 @@ function insertBudgets(budgetList, selector) {
   });
 }
 
-function bindBudgetLinks() {
+function bindBudgetShowLinks() {
   $('.budget_link a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href).success(function(data) {
@@ -48,5 +48,5 @@ function bindBudgetLinks() {
 function insertBudgetContent(data) {
   $('#content').empty();
   $('#content').html(data);
-  bindCategoryLinks();
+  bindCategoryShowLinks();
 }

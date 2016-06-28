@@ -39,7 +39,7 @@ function fillStaticCategoryInfo(category) {
 function fillCategoryLinks(category) {
   $('#new_expense').attr("action", "/categories/" + category.id + "/expenses");
   $('.budget_link').append('<a href="/budgets/' + category.budget.id + '">Return to Budget</a>');
-  $('#deletecategorylink').append('<a href="/categories/' + category.id + '" data-method="delete">Delete this Category</a>');
+  $('#deletecategorylink').append('<a href="/categories/' + category.id + '">Delete this Category</a>');
 }
 
 function insertCategoryHTML() {
@@ -47,8 +47,24 @@ function insertCategoryHTML() {
   $('#content').html(categoryHTML);
 }
 
+function bindCategoryDeleteLinks() {
+  $('#deletecategorylink a').on('click', function(evnet) {
+    event.preventDefault();
+    link = this.href;
+    console.log(link);
+    $.ajax({
+      url: link,
+      type: 'DELETE',
+      success: function(data) {
+        console.log(data);
+        insertBudgetContent(data);
+      }
+    });
+  });
+}
+
 // if the user clicks on a category link, clear the page, add info regarding category, and bind the expense form and delete links
-function bindCategoryLinks() {
+function bindCategoryShowLinks() {
   $('.category a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href, function(data) {
@@ -56,7 +72,7 @@ function bindCategoryLinks() {
       insertCategoryHTML();
       fillStaticCategoryInfo(category);
       fillCategoryLinks(category);
-      bindBudgetLinks();
+      bindBudgetShowLinks();
       bindCategoryDeleteLinks();
       updateCategory(category);
       fillExpenseTable(category);

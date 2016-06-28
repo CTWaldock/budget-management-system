@@ -16,7 +16,7 @@ class ExpensesController < ApplicationController
     @category = @expense.category
     authorize @expense
     @expense.destroy
-    render json: @category, status: 200
+    render json: @category
   end
 
   private
