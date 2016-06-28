@@ -40,7 +40,6 @@ function fillCategoryLinks(category) {
   $('#new_expense').attr("action", "/categories/" + category.id + "/expenses");
   $('.budget_link').append('<a href="/budgets/' + category.budget.id + '">Return to Budget</a>');
   $('#deletecategorylink').append('<a href="/categories/' + category.id + '" data-method="delete">Delete this Category</a>');
-  bindBudgetLinks();
 }
 
 function insertCategoryHTML() {
@@ -57,10 +56,12 @@ function bindCategoryLinks() {
       insertCategoryHTML();
       fillStaticCategoryInfo(category);
       fillCategoryLinks(category);
+      bindBudgetLinks();
+      bindCategoryDeleteLinks();
       updateCategory(category);
       fillExpenseTable(category);
       bindExpenseForm();
-      bindDeleteLinks();
+      bindExpenseDeleteLinks();
     });
   });
 }

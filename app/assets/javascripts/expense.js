@@ -57,7 +57,7 @@ function bindExpenseForm() {
       category = new Category(data);
       updateCategory(category);
       fillExpenseTable(category);
-      bindDeleteLinks(); // need to rebind delete links as the table was deleted
+      bindExpenseDeleteLinks(); // need to rebind delete links as the table was deleted
     }).fail(function(error) {
       resetErrors();
       addErrors(JSON.parse(error.responseText).error);
@@ -65,7 +65,7 @@ function bindExpenseForm() {
   });
 }
 
-function bindDeleteLinks() {
+function bindExpenseDeleteLinks() {
   $('td a').on('click', function(event) {
     event.preventDefault();
     link = this.href
@@ -77,7 +77,7 @@ function bindDeleteLinks() {
         category = new Category(data);
         updateCategory(category);
         fillExpenseTable(category); // need to rebind delete links as the table was deleted
-        bindDeleteLinks();
+        bindExpenseDeleteLinks();
       }
     });
   });
