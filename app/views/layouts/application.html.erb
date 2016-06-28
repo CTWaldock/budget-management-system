@@ -12,7 +12,9 @@
   <%= render 'layouts/header' %>
   <div class="container-fluid">
     <%= render 'layouts/notifications' %>
-    <%= yield %>
+    <div id="content">
+      <%= yield %>
+    </div>
   </div>
 </body>
 </html>

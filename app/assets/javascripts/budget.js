@@ -21,6 +21,7 @@ function populateIndex() {
     insertBudgets(data.inactive, "#inactive");
     $("#completed").append('<h3>Completed Budgets</h3>');
     insertBudgets(data.completed, "#completed");
+    bindBudgetLinks();
   }, "JSON")
 }
 
@@ -34,3 +35,22 @@ function insertBudgets(budgetList, selector) {
     }
   });
 }
+
+function bindBudgetLinks() {
+  $('#budget_links a').on('click', function(event) {
+    event.preventDefault();
+    $.get(this.href).success(function(data) {
+      insertBudgetContent(data);
+    });
+  });
+}
+
+function insertBudgetContent(data) {
+  $('#content').empty();
+  $('#content').html(data);
+  bindCategoryLinks();
+}
+
+$(document).ready(function() {
+  populateIndex();
+});

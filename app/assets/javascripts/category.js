@@ -42,9 +42,9 @@ function fillCategoryLinks(category) {
   $('#deletecategorylink').append('<a href="/categories/' + category.id + '" data-method="delete">Delete this Category</a>');
 }
 
-function replaceContent() {
+function insertCategoryHTML() {
   $('#content').empty();
-  $('#content').html(categoryShow);
+  $('#content').html(categoryHTML);
 }
 
 // if the user clicks on a category link, clear the page, add info regarding category, and bind the expense form and delete links
@@ -53,7 +53,7 @@ function bindCategoryLinks() {
     event.preventDefault();
     $.get(this.href, function(data) {
       category = new Category(data)
-      replaceContent();
+      insertCategoryHTML();
       fillStaticCategoryInfo(category);
       fillCategoryLinks(category);
       updateCategory(category);
@@ -66,7 +66,7 @@ function bindCategoryLinks() {
 
 // HTML to be inserted when category link is clicked. Model information is added via JSON + jQuery.
 
-var categoryShow = '<h1 class="category name"></h1>\
+var categoryHTML = '<h1 class="category name"></h1>\
 <h4 id="budgetlink"></h4>\
 <h4 id="deletecategorylink" class="warning"></h4>\
 <br>\

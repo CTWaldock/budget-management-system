@@ -28,6 +28,7 @@ class BudgetsController < ApplicationController
   def show
     @budget = Budget.find(params[:id])
     authorize @budget
+    render layout: false
   end
 
   def edit
