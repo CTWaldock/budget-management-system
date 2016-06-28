@@ -29,11 +29,6 @@ function resetExpenseInput() {
   $('#new_expense')[0].reset();
 }
 
-function handleExpenseError(error) {
-  resetErrors();
-  addErrors(JSON.parse(error.responseText).error);
-}
-
 function fillExpenseTable(category) {
   var expenses = category.expenses
   for (var i = 0; i < expenses.length; i++) {
@@ -57,9 +52,16 @@ function bindExpenseForm() {
     var expensePost = $.post(this.action, expenseParams);
 
     expensePost.done(function(data) {
-      fillVariableCategoryInfo(data);
+      resetErrors();
+      resetExpenseTable();
+      resetExpenseInput();
+      category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
+      updateCategory(category);
+      fillExpenseTable(category);
+      bindDeleteLinks();
     }).fail(function(error) {
-      handleExpenseError(error);
+      resetErrors();
+      addErrors(JSON.parse(error.responseText).error);
     });
   });
 }
@@ -72,7 +74,11 @@ function bindDeleteLinks() {
       url: link,
       type: 'DELETE',
       success: function(data) {
-        fillVariableCategoryInfo(data)
+        resetExpenseTable();
+        category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
+        updateCategory(category);
+        fillExpenseTable(category);
+        bindDeleteLinks();    
       }
     });
   });
