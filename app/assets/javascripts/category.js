@@ -51,12 +51,10 @@ function bindCategoryDeleteLinks() {
   $('#deletecategorylink a').on('click', function(evnet) {
     event.preventDefault();
     link = this.href;
-    console.log(link);
     $.ajax({
       url: link,
       type: 'DELETE',
       success: function(data) {
-        console.log(data);
         replaceContent(data);
         bindCategoryShowLinks();
       }
