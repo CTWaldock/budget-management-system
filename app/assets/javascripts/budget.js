@@ -10,6 +10,10 @@ Budget.prototype.exceeded = function() {
   return (this.totalExpense > this.limit);
 }
 
+Budget.prototype.showLink = function() {
+  return '<a href="/budgets/' + this.id + '"><p>' + this.name + '</p></a>'
+}
+
 function populateIndex() {
   $.get('/user/budgets', function(data) {
     $("#active").append('<h3>Active Budgets</h3>');
@@ -24,7 +28,7 @@ function populateIndex() {
 function insertBudgets(budgetList, selector) {
   $.each(budgetList, function(index, params) {
     var budget = new Budget(params.name, params.id, params.limit, params.total_expense);
-    $(selector).append('<a href="/budgets/' + budget.id + '"><p>' + budget.name + '</p></a>');
+    $(selector).append(budget.showLink());
     if (budget.exceeded()) {
       $(selector).children().last().addClass("warning");
     }
