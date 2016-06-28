@@ -63,6 +63,8 @@ function bindCategoryLinks() {
   });
 }
 
+// HTML to be inserted when category link is clicked. Model information is added via JSON + jQuery.
+
 var categoryShow = '<h1 class="category name"></h1>\
 <h4 id="budgetlink"></h4>\
 <h4 id="deletecategorylink" class="warning"></h4>\
