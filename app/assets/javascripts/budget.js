@@ -40,13 +40,24 @@ function bindBudgetShowLinks() {
   $('.budget_link a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href).success(function(data) {
-      insertBudgetContent(data);
+      replaceContent(data);
+      bindCategoryShowLinks();
     });
   });
 }
 
-function insertBudgetContent(data) {
+function replaceContent(data) {
   $('#content').empty();
   $('#content').html(data);
-  bindCategoryShowLinks();
+}
+
+function bindBudgetNewLink() {
+  $('.new_budget a').on('click', function(event) {
+    event.preventDefault();
+    $.get(this.href).success(funtion(data) {
+      replaceContent(data);
+      bindBudgetForm();
+      }
+    })
+  })
 }

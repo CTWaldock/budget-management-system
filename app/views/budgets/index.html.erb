@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h2><%= link_to "Create a New Budget", new_budget_path %></h2>
+    <h2 class="new_budget"><%= link_to "Create a New Budget", new_budget_path %></h2>
     <br>
     <div class=budget_link>
       <div id="active">
@@ -26,5 +26,6 @@
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
     populateIndex();
+    bindBudgetNewLink();
   });
 </script>
