@@ -1,9 +1,8 @@
-function Budget (name, id, limit, totalExpense) {
-  this.name = name;
-  this.id = id;
-  this.limit = limit;
-  this.totalExpense = totalExpense;
-
+function Budget (params) {
+  this.name = params.name;
+  this.id = params.id;
+  this.limit = params.limit;
+  this.totalExpense = params.total_expense;
 }
 
 Budget.prototype.exceeded = function() {
@@ -27,9 +26,11 @@ function populateIndex() {
 
 function insertBudgets(budgetList, selector) {
   $.each(budgetList, function(index, params) {
-    var budget = new Budget(params.name, params.id, params.limit, params.total_expense);
+    var budget = new Budget(params);
     $(selector).append(budget.showLink());
     // turn link red if budget is exceeded
+    console.log(budget);
+    console.log(budget.exceeded());
     if (budget.exceeded()) {
       $(selector).children().last().addClass("warning");
     }

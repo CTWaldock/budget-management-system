@@ -1,7 +1,7 @@
-function Expense (id, cost, description) {
-  this.id = id;
-  this.cost = cost;
-  this.description = description;
+function Expense (params) {
+  this.id = params.id;
+  this.cost = params.cost;
+  this.description = params.description;
 }
 
 Expense.prototype.percentage = function() {
@@ -54,7 +54,8 @@ function bindExpenseForm() {
       resetErrors();
       resetExpenseTable();
       resetExpenseInput();
-      category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
+      console.log(data);
+      category = new Category(data);
       updateCategory(category);
       fillExpenseTable(category);
       bindDeleteLinks(); // need to rebind delete links as the table was deleted
@@ -74,7 +75,7 @@ function bindDeleteLinks() {
       type: 'DELETE',
       success: function(data) {
         resetExpenseTable();
-        category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses);
+        category = new Category(data);
         updateCategory(category);
         fillExpenseTable(category); // need to rebind delete links as the table was deleted
         bindDeleteLinks();

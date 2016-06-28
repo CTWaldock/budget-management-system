@@ -1,12 +1,12 @@
-function Category (id, title, subtotal, budget, expenses) {
-  this.id = id;
-  this.title = title;
-  this.subtotal = subtotal;
-  this.budget = new Budget(budget.name, budget.id, budget.limit, budget.total_expense);
+function Category(params) {
+  this.id = params.id;
+  this.title = params.title;
+  this.subtotal = params.subtotal;
+  this.budget = new Budget(params.budget);
   this.expenses = []
-  for (var i = 0; i < expenses.length; i++) {
+  for (var i = 0; i < params.expenses.length; i++) {
     // need expense to know category to calculate percentage but also need category to know expenses to create table
-    var expense = new Expense(expenses[i].id, expenses[i].cost, expenses[i].description);
+    var expense = new Expense(params.expenses[i]);
     expense.category = this;
     this.expenses.push(expense);
   };
@@ -52,7 +52,7 @@ function bindCategoryLinks() {
   $('.category a').on('click', function(event) {
     event.preventDefault();
     $.get(this.href, function(data) {
-      category = new Category(data.id, data.title, data.subtotal, data.budget, data.expenses)
+      category = new Category(data)
       replaceContent();
       fillStaticCategoryInfo(category);
       fillCategoryLinks(category);
