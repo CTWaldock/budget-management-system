@@ -69,7 +69,7 @@ function bindBudgetEditLink() {
 
 function bindEditBudgetForm() {
   $('.edit_budget').on('submit', function(event) {
-    event.prevaultDefault();
+    event.preventDefault();
     budgetParams = $(this).serialize();
     $.ajax({
       url: this.action,
@@ -80,7 +80,7 @@ function bindEditBudgetForm() {
         bindCategoryShowLinks();
         bindBudgetEditLink();
       },
-      error: function(data) {
+      error: function(error) {
         replaceContent(error.responseText);
         bindEditBudgetForm();
       }

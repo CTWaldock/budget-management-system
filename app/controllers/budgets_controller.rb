@@ -8,7 +8,9 @@ class BudgetsController < ApplicationController
     @completed_budgets = current_user.budgets.completed
     respond_to do |f|
       f.html
-      f.json { render :json => {active: @active_budgets, inactive: @inactive_budgets, completed: @completed_budgets} }
+      f.json { render :json => { active: @active_budgets,
+                                 inactive: @inactive_budgets,
+                                 completed: @completed_budgets } }
     end
   end
 
