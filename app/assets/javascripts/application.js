@@ -18,6 +18,7 @@
 
 
 function replaceContent(data) {
+  $('.notice, .alert').text("");
   $('#content').empty();
   $('#content').html(data);
 }

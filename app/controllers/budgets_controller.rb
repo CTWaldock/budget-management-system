@@ -66,7 +66,7 @@ class BudgetsController < ApplicationController
   # Ensure that users are not able to interact with budgets until they have timezones in order to avoid issues with dates.
 
   def require_time_zone
-    redirect_to edit_user_time_zone_path unless current_user.time_zone
+    redirect_to edit_user_time_zone_path, :alert => "Please set your timezone." unless current_user.time_zone
   end
 
 end
