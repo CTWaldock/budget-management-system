@@ -94,13 +94,11 @@ function bindNewBudgetForm() {
     budgetParams = $(this).serialize();
     budgetPost = $.post(this.action, budgetParams);
     budgetPost.success(function(data) {
-      console.log("Success triggered.")
       replaceContent(data);
       bindCategoryShowLinks();
       bindBudgetEditLink();
     });
     budgetPost.fail(function(error) {
-      console.log("Failure triggered.")
       replaceContent(error.responseText);
       bindNewBudgetForm();
     });
