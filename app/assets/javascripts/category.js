@@ -91,6 +91,7 @@ var categoryHTML = '<h1 class="category name"></h1>\
 <h4>Add Expense</h4>\
 <div class="row">\
   <div class="col-md-6 col-md-offset-3">\
+    <div class="center">\
     <form class="form-inline" id="new_expense" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">\
       <div id="error_explanation">\
         <h2 id="error_message"></h2>\
@@ -104,6 +105,7 @@ var categoryHTML = '<h1 class="category name"></h1>\
     </div>\
     <input type="submit" name="commit" value="Create Expense" class="btn btn-primary btn-sm">\
     </form>\
+    </div>\
     <br></br>\
     <p>Total costs amount to <span id="cost"></span>.</p>\
     <p>Represents <span id="current"></span> of current budget expenditure for <span class="budget name"></span>.</p>\
