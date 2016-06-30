@@ -52,6 +52,11 @@ describe Expense do
       expect(new_expense).to have(2).error_on(:cost)
     end
 
+    it 'requires a numerical cost' do
+      new_expense = FactoryGirl.create(:expense, cost: "Whee!")
+      expect(new_expense).to have(1).error_on(:cost)
+    end
+
     it 'is invalid without a category' do
       new_expense = Expense.new(description: "soda", cost: 5.00)
       expect(new_expense).to have(1).error_on(:category)
