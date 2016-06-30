@@ -61,6 +61,24 @@ describe Budget do
       expect(@budget.remaining_days).to eq(30)
     end
 
+    it 'knows when it is active' do
+      expect(@budget.status).to eq("Active")
+    end
+
+    it 'knows when it is complete' do
+      @budget.update(start_date: Date.current - 2, end_date: Date.current)
+      expect(@budget.status).to eq("Complete")
+    end
+
+    it 'knows when it is inactive' do
+      @budget.update(start_date: Date.current + 2)
+      expect(@budget.status).to eq("Inactive")
+    end
+
+    it 'knows when it is completed' do
+    end
+
+
   end
 
   context 'validations' do
