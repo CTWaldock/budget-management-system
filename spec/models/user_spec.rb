@@ -25,4 +25,9 @@ describe User do
     expect(user).to respond_to(:time_zone)
   end
 
+  it 'has many budgets' do
+    user = FactoryGirl.create(:user)
+    expect(user).to respond_to(:budgets)
+  end
+
 end
