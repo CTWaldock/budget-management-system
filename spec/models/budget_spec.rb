@@ -8,6 +8,14 @@ describe Budget do
 
   context 'associations' do
 
+    describe 'user' do
+
+      it 'has a user' do
+        expect(@budget).to respond_to(:user)
+      end
+
+    end
+
     describe 'categories' do
 
       before do
