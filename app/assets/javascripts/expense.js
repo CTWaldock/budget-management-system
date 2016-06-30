@@ -19,8 +19,8 @@ Expense.prototype.expenseRow = function() {
 function resetErrors() {
   $('#error_message').text("");
   $('#error_list').empty();
-  $('#error_description').removeClass('field_with_errors');
-  $('#error_cost').removeClass('field_with_errors');
+  $('#expense_description').parent().removeClass('field_with_errors');
+  $('#expense_cost').parent().removeClass('field_with_errors');
 }
 
 function resetExpenseTable() {
@@ -44,7 +44,7 @@ function addErrors(errors) {
   for (var j = 0; j < errors.length; j++) {
     var error = errors[j];
     var errorID = "#expense_" + error.split(" ")[0].toLowerCase();
-    $(errorID).addClass('field_with_errors');
+    $(errorID).parent().addClass('field_with_errors');
     $('#error_list').append('<li>' + error + '</li>');
   }
 }
