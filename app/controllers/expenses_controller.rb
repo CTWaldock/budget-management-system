@@ -14,9 +14,9 @@ class ExpensesController < ApplicationController
   def destroy
     @expense = Expense.find(params[:id])
     @category = @expense.category
-    
+    authorize @expense
     @expense.destroy
-    render json: @category
+    render json: @category, status: 200
   end
 
   private
