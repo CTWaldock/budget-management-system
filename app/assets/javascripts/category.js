@@ -1,8 +1,3 @@
-
-
-
-
-
 function Category(params) {
   this.id = params.id;
   this.title = params.title;
