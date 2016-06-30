@@ -4,7 +4,7 @@ describe Category do
 
   before do
     @budget = FactoryGirl.create(:budget)
-    @category = FactoryGirl.create(:category, budget: @budget)
+    @category = @budget.categories.first
   end
 
   context 'associations' do
@@ -36,6 +36,26 @@ describe Category do
         expect(Expense.all).to_not include(expense)
       end
 
+    end
+
+  end
+
+  describe 'percentage information' do
+
+    before do
+      @category_2 = FactoryGirl.create(:category, title: "Gas", budget: @budget)
+      FactoryGirl.create(:expense, description: "Very Expensive Pizza", cost: 1000, category: @category)
+    end
+
+    it 'knows its current percentage of a budget' do
+      expect(@category.current_percentage).to eq(100)
+      FactoryGirl.create(:expense, description: "Very Expensive Gas", cost: 4000, category: @category_2)
+      expect(@category.current_percentage).to eq(20)
+      expect(@category_2.current_percentage).to eq(80)
+    end
+
+    it 'knows its total maximum percentage of a budget' do
+      expect(@category.total_percentage).to eq(10)
     end
 
   end
