@@ -2,13 +2,13 @@ require 'rails_helper'
 
 describe Expense do
 
-  context 'associations' do
+  before do
+    @budget = FactoryGirl.create(:budget)
+    @category = FactoryGirl.create(:category, budget: @budget)
+    @expense = FactoryGirl.create(:expense, cost: 10, category: @category)
+  end
 
-    before do
-      @budget = FactoryGirl.create(:budget)
-      @category = FactoryGirl.create(:category, budget: @budget)
-      @expense = FactoryGirl.create(:expense, cost: 10, category: @category)
-    end
+  context 'associations' do
 
     it 'belongs to a category' do
       expect(@expense.category).to eq(@category)
