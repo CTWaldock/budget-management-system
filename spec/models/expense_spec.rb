@@ -7,7 +7,7 @@ describe Expense do
     before do
       @budget = FactoryGirl.create(:budget)
       @category = FactoryGirl.create(:category, budget: @budget)
-      @expense = FactoryGirl.create(:expense, category: @category)
+      @expense = FactoryGirl.create(:expense, cost: 10, category: @category)
     end
 
     it 'belongs to a category' do
@@ -53,13 +53,23 @@ describe Expense do
     end
 
     it 'requires a numerical cost' do
-      new_expense = FactoryGirl.create(:expense, cost: "Whee!")
+      new_expense = Expense.new(description: "Soda", category: @category, cost: "Whee!")
       expect(new_expense).to have(1).error_on(:cost)
     end
 
     it 'is invalid without a category' do
       new_expense = Expense.new(description: "soda", cost: 5.00)
       expect(new_expense).to have(1).error_on(:category)
+    end
+
+  end
+
+  context 'percentages' do
+
+    it 'knows its percentage of a category' do
+      expect(@expense.category_percentage).to eq(100)
+      new_expense = FactoryGirl.create(:expense, category: @category, cost: 5)
+      expect(@expense.category_percentage).to eq(67)
     end
 
   end
