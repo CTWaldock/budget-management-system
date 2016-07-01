@@ -8,6 +8,7 @@ describe "user registration" do
     fill_in "Password confirmation", with: "whatagreatpassword"
     click_button "Sign up"
 
+    expect(page).to have_content("Please set your timezone.")
   end
 
   it "does not allow new users to sign up with invalid information" do
