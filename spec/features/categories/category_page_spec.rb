@@ -10,92 +10,104 @@ describe 'category page' do
     @other_category = FactoryGirl.create(:category, title: "Gas", budget: @budget)
     FactoryGirl.create(:expense, category: @category)
     @expense = FactoryGirl.create(:expense, description: "Burger", cost: 9.50, category: @category)
+    Capybara.javascript_driver = :webkit
   end
 
-  it 'restricts access to owner of budget only' do
-    other_user = FactoryGirl.create(:user, email: "jim@yahoo.com")
-    login_as(other_user, :scope => :user)
+  context 'other user' do
 
-    visit category_path(@category)
-    expect(page).to have_content("You don't have access to that budget.")
-    expect(page).to_not have_content(@category.title)
+    it 'restricts access to owner of budget only' do
+      other_user = FactoryGirl.create(:user, email: "jim@yahoo.com")
+      login_as(other_user, :scope => :user)
+
+      visit category_path(@category)
+      expect(page).to have_content("You don't have access to that budget.")
+      expect(page).to_not have_content(@category.title)
+    end
+
   end
 
+  context 'owner' do
 
-  it 'lists information regarding the category' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    expect(page).to have_content("Food")
-    expect(page).to have_content("$20.00")
-    expect(page).to have_content("100%")
-    expect(page).to have_content("20%")
-  end
+    before do
+      login_as(@user, :scope => :user)
+      visit user_budgets_path
+      click_link "My Budget"
+    end
 
-  it 'allows the user to return to the budget' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    click_link "Return to Budget"
-    expect(page.current_path).to eq budget_path(@budget)
-  end
+    it 'lists information regarding the category', :js => true do
+      click_link "Food", :match => :first
+      expect(page).to have_content("Food")
+      expect(page).to have_content("$20.00")
+      expect(page).to have_content("100%")
+      expect(page).to have_content("20%")
+    end
 
-  it 'allows users to delete categories and adjusts budget accordingly' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    click_link "Delete Category"
-    expect(page.current_path).to eq budget_path(@budget)
-    expect(page).to_not have_content("Food")
-    expect(page).to have_content("Current Expenditure: $0.00")
-    @budget.reload
-    expect(@budget.total_expense).to eq(0)
-    expect(@budget.categories.count).to eq(1)
-    expect(@budget.expenses).to_not include(@expense)
-  end
+    it 'allows the user to return to the budget', :js => true do
+      click_link "Food", :match => :first
+      click_link "Return to Budget"
+      expect(page).to have_content(@budget.total_expense)
+    end
 
-  it 'shows errors for invalid expenses' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    click_button "Create Expense"
+    it 'allows users to delete categories and adjusts budget accordingly', :js => true do
+      login_as(@user, :scope => :user)
+      visit category_path(@category)
+      click_link "Delete Category"
+      expect(page.current_path).to eq budget_path(@budget)
+      expect(page).to_not have_content("Food")
+      expect(page).to have_content("Current Expenditure: $0.00")
+      @budget.reload
+      expect(@budget.total_expense).to eq(0)
+      expect(@budget.categories.count).to eq(1)
+      expect(@budget.expenses).to_not include(@expense)
+    end
 
-    expect(page).to have_content("Description can't be blank")
-    expect(page).to have_content("Cost can't be blank")
-    expect(page).to have_content("Cost is not a number")
-  end
+    it 'shows errors for invalid expenses', :js => true do
+      login_as(@user, :scope => :user)
+      visit category_path(@category)
+      click_button "Create Expense"
 
-  it 'allows users to add new expenses and adjusts subtotal and budget accordingly' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    fill_in "Description", with: "Coke"
-    fill_in "Cost", with: "5.00"
-    click_button "Create Expense"
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Cost can't be blank")
+      expect(page).to have_content("Cost is not a number")
+    end
 
-    expect(page).to have_content("Coke")
-    expect(page).to have_content("25.0")
+    it 'allows users to add new expenses and adjusts subtotal and budget accordingly', :js => true do
+      login_as(@user, :scope => :user)
+      visit category_path(@category)
+      fill_in "Description", with: "Coke"
+      fill_in "Cost", with: "5.00"
+      click_button "Create Expense"
 
-    @budget.reload
-    expect(@budget.total_expense).to eq(25)
-    expect(@budget.expenses.last.description).to eq("Coke")
-  end
+      expect(page).to have_content("Coke")
+      expect(page).to have_content("25.0")
 
-  it 'gives appropriate error messages when fields are not filled in' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    click_button "Create Expense"
+      @budget.reload
+      expect(@budget.total_expense).to eq(25)
+      expect(@budget.expenses.last.description).to eq("Coke")
+    end
 
-    expect(page).to have_content("Description can't be blank")
-    expect(page).to have_content("Cost can't be blank")
-    expect(page).to have_content("Cost is not a number")
-  end
+    it 'gives appropriate error messages when fields are not filled in', :js => true do
+      login_as(@user, :scope => :user)
+      visit category_path(@category)
+      click_button "Create Expense"
 
-  it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly' do
-    login_as(@user, :scope => :user)
-    visit category_path(@category)
-    click_link("Delete Expense", :match => :first)
+      expect(page).to have_content("Description can't be blank")
+      expect(page).to have_content("Cost can't be blank")
+      expect(page).to have_content("Cost is not a number")
+    end
 
-    expect(page).to_not have_content("Burger")
-    expect(page).to_not have_content("$20.00")
+    it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly', :js => true do
+      login_as(@user, :scope => :user)
+      visit category_path(@category)
+      click_link("Delete Expense", :match => :first)
 
-    @budget.reload
-    expect(@budget.total_expense).to eq(10.50)
+      expect(page).to_not have_content("Burger")
+      expect(page).to_not have_content("$20.00")
+
+      @budget.reload
+      expect(@budget.total_expense).to eq(10.50)
+    end
+
   end
 
 end

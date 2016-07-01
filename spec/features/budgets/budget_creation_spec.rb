@@ -4,23 +4,22 @@ describe 'budget creation' do
 
   before do
     @user = FactoryGirl.create(:user)
-    Capybara.javascript_driver = :webkit
   end
 
-  it 'requires users to have a timezone before allowing them to access the budget creation page', :js => true do
+  it 'requires users to have a timezone before allowing them to access the budget creation page' do
     @user.update(time_zone: nil)
     login_as(@user, :scope => :user)
     visit new_budget_path
     expect(page).to have_content("Timezone Settings")
   end
 
-  it 'allows users with timezones to access the budget creation page', :js => true do
+  it 'allows users with timezones to access the budget creation page' do
     login_as(@user, :scope => :user)
     visit new_budget_path
     expect(page).to have_content("Budget Specifications")
   end
 
-  it 'does not create a budget with invalid parameters', :js => true do
+  it 'does not create a budget with invalid parameters' do
     login_as(@user, :scope => :user)
     visit new_budget_path
     click_button ("Create Budget")
