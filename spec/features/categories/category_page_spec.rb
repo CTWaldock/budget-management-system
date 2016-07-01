@@ -49,10 +49,8 @@ describe 'category page' do
     end
 
     it 'allows users to delete categories and adjusts budget accordingly', :js => true do
-      login_as(@user, :scope => :user)
-      visit category_path(@category)
-      click_link "Delete Category"
-      expect(page.current_path).to eq budget_path(@budget)
+      click_link "Food", :match => :first
+      click_link "Delete this Category"
       expect(page).to_not have_content("Food")
       expect(page).to have_content("Current Expenditure: $0.00")
       @budget.reload
@@ -62,8 +60,7 @@ describe 'category page' do
     end
 
     it 'shows errors for invalid expenses', :js => true do
-      login_as(@user, :scope => :user)
-      visit category_path(@category)
+      click_link "Food", :match => :first
       click_button "Create Expense"
 
       expect(page).to have_content("Description can't be blank")
@@ -72,8 +69,7 @@ describe 'category page' do
     end
 
     it 'allows users to add new expenses and adjusts subtotal and budget accordingly', :js => true do
-      login_as(@user, :scope => :user)
-      visit category_path(@category)
+      click_link "Food", :match => :first
       fill_in "Description", with: "Coke"
       fill_in "Cost", with: "5.00"
       click_button "Create Expense"
@@ -86,19 +82,8 @@ describe 'category page' do
       expect(@budget.expenses.last.description).to eq("Coke")
     end
 
-    it 'gives appropriate error messages when fields are not filled in', :js => true do
-      login_as(@user, :scope => :user)
-      visit category_path(@category)
-      click_button "Create Expense"
-
-      expect(page).to have_content("Description can't be blank")
-      expect(page).to have_content("Cost can't be blank")
-      expect(page).to have_content("Cost is not a number")
-    end
-
     it 'allows users to delete expenses on the page and adjusts subtotal and budget accordingly', :js => true do
-      login_as(@user, :scope => :user)
-      visit category_path(@category)
+      click_link "Food", :match => :first
       click_link("Delete Expense", :match => :first)
 
       expect(page).to_not have_content("Burger")
