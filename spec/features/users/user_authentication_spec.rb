@@ -8,7 +8,6 @@ describe "user registration" do
     fill_in "Password confirmation", with: "whatagreatpassword"
     click_button "Sign up"
 
-    expect(page).to have_content("Welcome! You have signed up successfully.")
   end
 
   it "does not allow new users to sign up with invalid information" do
