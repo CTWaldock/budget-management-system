@@ -38,7 +38,7 @@ gem 'bootswatch-rails'
 
 gem 'active_model_serializers'
 
-gem 'capybara-webkit'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -58,6 +58,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-collection_matchers'
   gem 'sqlite3'
+  gem 'capybara-webkit'
 end
 
 group :production do
