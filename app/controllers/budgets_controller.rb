@@ -1,16 +1,12 @@
 class BudgetsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_time_zone
+  before_action :set_and_authorize_budget, except: [:index, :new, :create]
 
   def index
-    @active_budgets = current_user.budgets.active
-    @inactive_budgets = current_user.budgets.inactive
-    @completed_budgets = current_user.budgets.completed
     respond_to do |f|
       f.html
-      f.json { render :json => { active: @active_budgets,
-                                 inactive: @inactive_budgets,
-                                 completed: @completed_budgets } }
+      f.json { render :json => { active: current_user.budgets.active, inactive: current_user.budgets.inactive,  completed: current_user.budgets.completed } }
     end
   end
 
@@ -29,20 +25,14 @@ class BudgetsController < ApplicationController
   end
 
   def show
-    @budget = Budget.find(params[:id])
-    authorize @budget
     render layout: false
   end
 
   def edit
-    @budget = Budget.find(params[:id])
-    authorize @budget
     render layout: false
   end
 
   def update
-    @budget = Budget.find(params[:id])
-    authorize @budget
     if @budget.update(budget_params)
       render :show, layout: false
     else
@@ -51,13 +41,16 @@ class BudgetsController < ApplicationController
   end
 
   def destroy
-    @budget = Budget.find(params[:id])
-    authorize @budget
     @budget.destroy
     redirect_to user_budgets_path
   end
 
   private
+
+  def set_and_authorize_budget
+    @budget = Budget.find(params[:id])
+    authorize @budget
+  end
 
   def budget_params
     params.require(:budget).permit(:name, :start_date, :end_date, :limit, :categories_attributes => [:title])
