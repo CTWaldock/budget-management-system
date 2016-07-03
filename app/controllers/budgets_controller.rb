@@ -17,11 +17,7 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = current_user.budgets.build(budget_params)
-    if @budget.save
-      render :show, layout: false, status: 201
-    else
-      render :new, layout: false, status: 422
-    end
+    @budget.save ? (render :show, layout: false, status: 201) : (render :new, layout: false, status: 422)
   end
 
   def show
@@ -33,11 +29,7 @@ class BudgetsController < ApplicationController
   end
 
   def update
-    if @budget.update(budget_params)
-      render :show, layout: false
-    else
-      render :edit, layout: false, status: 422
-    end
+    @budget.update(budget_params) ? (render :show, layout: false) : (render :edit, layout: false, status: 422)
   end
 
   def destroy
