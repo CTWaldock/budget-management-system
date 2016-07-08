@@ -46,15 +46,7 @@ Fix the expense form -- currently uncentered. COMPLETED.
 
 Look into requesting HTML from the server for the budget show, new, and edit, page and then inserting that so we can continue to move seamlessly. COMPLETED.
 
------------------
-
-BLOGGING
-
-Make a blog post on something related to the project. COMPLETED.
-
 ------------------
-
-AFTER SUBMISSION ISSUES (YOU NEED TO RECORD!)
 
 Clear headers on inserting new content. COMPLETED.
 
@@ -69,3 +61,14 @@ Add more model tests. COMPLETED.
 Maybe support Firefox for the date input field through a placeholder or something. COMPLETED.
 
 Add Webdriver to test and fix feature tests. COMPLETED.
+
+----------------
+Future Features
+
+Separate category into a different model and have a join table between category and budgets?
+
+Budget templates?
+
+Household budget oriented direction: restrain budget flexibility, focus on monthly budgets, track percentage expenditure of categories throughout all budgets.
+
+More flexibility and enterprise oriented direction: Add feature to allow users to invite others to budgets, budget admin dashboard, add/remove privileges to delete, update, edit, etc.
