@@ -19,5 +19,5 @@
 # Ignore application configuration
 /config/application.yml
 
-/notes.md
+
 blog/
