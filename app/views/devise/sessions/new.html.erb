@@ -5,12 +5,12 @@
   <div class="form-group">
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "example@example.com" %>
+      <%= f.email_field :email, autofocus: true, class: "form-control", value: "example@example.com" %>
     </div>
 
     <div class="field">
       <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "example" %>
+      <%= f.password_field :password, autocomplete: "off", class: "form-control", value: "example" %>
     </div>
 
     <% if devise_mapping.rememberable? -%>
