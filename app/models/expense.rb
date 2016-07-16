@@ -12,6 +12,8 @@ class Expense < ActiveRecord::Base
 
   private
 
+  # NOTE: Refactor to use ActiveRecord queries instead of storing redundant data in budget and category tables.
+
   def add_to_budget_and_category
     budget = category.budget
     category.subtotal += self.cost
