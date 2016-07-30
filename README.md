@@ -15,7 +15,7 @@ You should now be able to sign up, log in, create budgets, and add expenses.
 
 ## Demo
 
-You can see a demo of this project [here](https://budget-management-system.herokuapp.com/) hosted via Heroku. An example account is included -- just fill in the placeholder text at the login page.
+You can see a demo of this project [here](https://budget-management-system.herokuapp.com/) hosted via Heroku. An example account is included -- just log in.
 
 ## Contributing
 
